@@ -1,0 +1,203 @@
+.botones{
+		float: rigth ;
+		width :150px;
+		background : ff0000;
+}
+
+.btn_quitar {
+    /*float: right;*/
+		/*box-shadow: 0px 34px 0px -15px rgb(181, 75, 58) inset; */
+    height:35px;
+    width:36px;
+    background-color: rgb(167,0,0); 
+    border-radius: 13px; 
+    background-image:url('../img/delete-api-button.png');
+    border: 1px solid rgb(36, 29, 19); display: inline-block; 
+    /*cursor: pointer; color: rgb(255, 255, 255); font-family: Arial; 
+    font-size: 13px; font-weight: bold; padding: 6px 10px; 
+    /*text-decoration: none; text-shadow: 0px -1px 0px rgb(122, 42, 29);
+   */
+   }
+.btn_deshacer {
+    /*float: right;*/
+    /*box-shadow: 0px 34px 0px -15px rgb(181, 75, 58) inset; */
+    height:20px;
+    width:20px;
+    background-color: white;
+    border-radius: 13px; 
+    /*background-image:url('../img/btn_undo.png');*/
+    background-image:url('../img/Go-Back-to-Previous16x16.png');
+    border: 1px solid rgb(36, 29, 19); display: inline-block; 
+   }
+.buttonxx {
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 8.5px 17px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   border-radius: 6px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 16px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   width: 150px;
+   height: 17px;
+   }
+.buttonxx:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.buttonxx:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
+#actividades {
+  border: 7px;
+  border-color: blue;
+  border-radius: 7px;
+  padding: 7px;
+
+}
+#btnEnviarForm {
+	/*	background-color: rgb(68, 199, 103); border-radius: 28px; border: 1px solid rgb(24, 171, 41);
+ 		display: inline-block; cursor: pointer; color: rgb(255, 255, 255); font-family: Arial; 
+ 		font-size: 17px; padding: 16px 31px; text-decoration: none; text-shadow: 0px 1px 0px rgb(47, 102, 39);
+*/
+}
+#contenedor {
+ 		color: #0000ff; font-family: sans-serif; 
+ 		width: 80%;
+ 		margin: 50px auto;
+		font-size:medium;
+
+}
+#cronograma  .dia{ max-width: 10%;}
+#cronograma  .horario { max-width: 10%;}
+#cronograma  .descripcion { max-width: 35%;}
+
+#crono_act  { max-width: 90%;
+        float: left;
+    }
+input {
+
+	max-width: 400px;
+}
+#presupuesto { width: 80%;margin-left: 10%;
+ /*	padding-left: 7px;
+	padding-right: 7px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	*/}
+#presupuesto input {float: right;}
+#presupuesto h2 { font-size: 16px;}
+#actividades h2 { font-size: 20px;}
+form {
+		width: 100%;
+ 		margin: auto ;
+}
+/*form h1 {
+      font-size: 18px;
+
+}*/
+.subparte {
+    width:100%;
+    margin: auto ;
+
+}
+.separador{
+ 		background: rgb(121, 187, 255) linear-gradient(to bottom, rgb(121, 187, 255) 5%, rgb(55, 141, 229) 100%) repeat scroll 0% 0%; 
+ 		color: rgb(255, 255, 255); font-family: Arial; 
+  		font-size: 15px; font-weight: bold;  
+}
+form textarea {
+  
+ border-color: blue; 
+  border-radius: 7px;
+  padding: 7px;
+}
+.tituloSeccion{ float : left ;}
+.parte {
+ 		width: 70%;
+ 		margin: auto ;
+} 
+@font-face {
+    font-family: "SourceSansPro-Semibold";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fuentes/SourceSansPro-Semibold.otf") format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-LightItalic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fuentes/SourceSansPro-LightIt.otf") format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-Light";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fuentes/source-sans-pro.light.ttf ") format("truetype");
+}
+
+@font-face {
+    font-family: "SourceSansPro-regular";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fuentes/source-sans-pro.regular.ttf   ") format("truetype");
+}
+
+h1 { /**/
+    font-size: 26px;
+    font-family: SourceSansPro-Semibold;
+     margin: auto;
+      /*font-style: italic;*/
+      
+}
+h2{ /**/
+  font-family: SourceSansPro-Semibold;
+  font-size: 23px;
+   margin: auto;
+}
+h3{ /**/
+   font-family: SourceSansPro-Semibold;
+  font-size: 20px;
+  margin: auto;
+
+}
+h4{   /* txt descriptivo */
+   font-family: SourceSansPro-LightItalic;
+  font-size: 17px;
+  font-style: italic;
+   margin: auto;
+   margin-bottom: 0;
+   padding-bottom: 0;
+}
+h5{  /**/
+   font-family: SourceSansPro-Light;
+  font-size: 17px;
+   margin: auto;
+}
+h6 { 
+    display: block;
+    font-size: 32;
+    font-weight: lighter;
+    font-family: "SourceSansPro";
+    font-style: normal;
+    src: local("?"), url("../fuentes/SourceSansPro-Lightit.otf") format("opentype");
+}
+h7{  
+   font-family: SourceSansPro-regular;
+  font-size: 20px;
+ margin: auto;
+}

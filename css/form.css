@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* CSS Document */
+* {font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:1em;}
+label{
+    display: block;
+	margin-top:1em;
+}
+label span{font-style:italic; font-size:12px; color:#999999;}
+fieldset{
+	border: 1px 0 0 0 solid #E0E0E0;
+	padding: 1em;
+	margin-bottom:2em;
+}
+legend{
+    margin:0px;
+	margin-left:-24px;
+	padding:10px;
+	width:650px;
+	border:none;
+    background: #CCCCCC;
+	border: 1px solid #E0E0E0;
+	font-weight:bold;
+}
+input[type=text],input[type=password]{
+	width:90%;
+}
+textarea{
+	width:90%;
+}
+.error{
+    background-color: #930;
+    padding: 0.5em;
+    color:#FFF;
+	border-bottom:#FFFFFF 1px solid
+}
+.tablalistado tr th {
+	border:#DDD 1px solid; 
+	padding:2px; 
+	margin:0px; 
+	background-color:#EEE;
+	font-weight:normal;
+	font-size:12px;
+}
+.tablalistado tr td {border:#DDD 1px solid; padding:2px;}
+td.tdcolor{ background-color:#009900; color:#FFFFFF}
+a.agregarmas,span.agregarmas{
+	padding:3px; 
+	margin:5px; 
+	background-color:#009900; 
+	color:#FFFFFF; 
+	display:inline-block; 
+	text-decoration:none;
+}
+a.agregarmas:hover{background-color:#006600;}
+a.agregarmenos,span.agregarmenos{	
+	padding:3px; 
+	margin:5px; 
+	background-color:#FFFFFF;
+	border:#009900 1px solid;
+	color:#009900; 
+	display:inline-block; 
+	text-decoration:none;
+}
+a.agregarmenos:hover{
+	border:#006600 1px solid;
+	color:#006600;
+}

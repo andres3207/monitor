@@ -1,0 +1,127 @@
+<!-- Navigation layout begin -->
+
+<div  >
+<ul id='menu-bar'> 
+	<li><a href="<?=base_url()?>login_ok" title="Inicio" >Inicio</a></li>    
+	<li><a href="#" title="Usuario" >Usuario</a>
+        <ul>
+	  <?php 
+	   echo "<li ><a href='".base_url()."password' title='Cambiar contraseña' >Cambiar contraseña</a></li>";
+   if($this->session->userdata('login_persona')=="user"){
+	  echo "<li ><a href='".base_url()."edit_perfil/index/' title='Editar perfil' > Editar Perfil </a></li>";
+      echo "<li ><a href='".base_url()."foto_cv/index/' title='Subir foto y cv' > Subir Foto y CV </a></li>";
+	  }
+    if($this->session->userdata('login_persona')=="organizacion"){
+      echo "<li ><a href='".base_url()."edit_perfil/index/' title='Editar perfil' > Editar Perfil </a></li>";
+      }
+      ?>
+        </ul>
+    </li>
+    <li><a href="#" title="Estructura oragnizacional" >Estructura</br>Oragnizacional</a>
+    <ul>
+         <?php if($this->session->userdata('login_persona')=="user"){
+            if($this->data_model->SoyDocente($this->session->userdata('login_id'))){
+    echo "<li><a href='".base_url()."index.php/eorga' title='Crear nueva E.O.'>Crear nueva E.O.</a></li>";
+    echo "<li><a href='".base_url()."index.php/mis_eo' title='Mis E.O.'>Mis E.O.</a></li>";
+     }} ?>
+     <li ><a href="<?=base_url()?>todos_eo" title="Todas las E.O." >Todas las E.O.</a></li>
+        </ul>
+    </li>
+    <li><a href="#" title="Proyectos" >Proyectos</a>
+    <ul>
+            <?php if($this->session->userdata('login_persona')=="user"){
+            if($this->data_model->SoyDocente($this->session->userdata('login_id'))){
+    echo "<li><a href='".base_url()."index.php/proyecto' title='crear proyecto nuevo'>Crear nuevo proyecto</a></li>"; }} ?>
+        <?php if($this->session->userdata('login_persona')=="user" or $this->session->userdata('login_persona')=="organizacion" ){
+    echo "<li ><a href='".base_url()."mis_proyectos' title='Mis proyectos'>Mis proyectos</a></li>"; } ?>
+            
+            <li ><a href="<?=base_url()?>todos_proyectos" title="Todos los proyectos" >Todos los proyectos</a></li>
+             <?php if(($this->session->userdata('login_persona')=="admin") and (1) ){
+    echo "<li ><a href='".base_url()."list_proyectos_ua/visado' title='Proyectos para visar'>Proyectos para visar</a></li>"; } ?>
+    <?php if(($this->session->userdata('login_persona')=="admin") and ($this->session->userdata('login_depend')==10) ){
+    echo "<li ><a href='".base_url()."list_proyectos_ua/evaluacion' title='Proyectos para evaluar'>Proyectos para evaluar</a></li>"; } ?>
+
+        </ul>
+    </li>
+    <li><a href="#" title="Actividades" >Actividades</a>
+    <ul>
+         <?php if($this->session->userdata('login_persona')==("user" or "admin")){
+            if($this->data_model->SoyDocente($this->session->userdata('login_id'))){
+    echo "<li><a href='".base_url()."index.php/actividad' title='Crear nueva Actividad'>Crear nueva Actividad</a></li>";
+    echo "<li><a href='".base_url()."index.php/mis_actividades' title='Mis Actividades'>Mis Actividades</a></li>";
+     }} ?>
+     <li ><a href="<?=base_url()?>todos_eo" title="Todas las Actividades" >Todas las Actividades</a></li>
+        </ul>
+    </li>
+    <?php if($this->session->userdata('login_persona')=="admin"){
+    echo "<li>";
+    echo '<a href="#" title="Listados" >Listado</a>';
+    echo "<ul>";            
+	echo "<li><a href='".base_url()."list_usuarios' title='Listado de usuarios registrados en U.A.'>Listado de usuarios registrados en U.A.</a></li>"; 
+    echo "</ul>";
+    echo "</li>";
+    } ?>
+    <?php if($this->session->userdata('login_persona')=="admin"){
+        if ($this->session->userdata('login_permisos')==1){
+    echo "<li>";
+    echo "<a href='#'' title='Administradores' >Administradores</a>";
+    echo "<ul>";
+    if ($this->session->userdata('login_depend')==0){
+        echo "<li><a href='".base_url()."list_admins' title='Administradores en el sistema'>Administradores en el sistema</a></li>"; 
+    }
+    echo "<li><a href='".base_url()."nuevo_admin' title='Crear nuevo administrador'>Crear nuevo administrador</a></li></ul></li>"; }} ?>
+        
+    
+    <?php if(($this->session->userdata('login_persona')=="admin")){
+    
+    echo "<li>";
+    echo "<a href='#'' title='Convocatorias' >Convocatorias</a>";
+    echo "<ul>";
+    if ((($this->session->userdata('login_depend')==0) or ($this->session->userdata('login_depend')==10) ) and ($this->session->userdata('login_permisos')==1) ){
+        echo "<li><a href='".base_url()."index.php/crear_conv' title='Abrir Convocatoria'>Abrir nueva Convocatoria</a></li>"; 
+    }
+    echo "</ul></li>";
+    
+    }?>
+    
+    
+    <li><a href="<?=base_url()?>login/logout" title="Salir">Salir</a></li>
+    <li style="padding: 0px 0 0 0;">
+    <?php   if($this->session->userdata('login_persona')=="user"){
+	    $foto='/var/www/nuevo_sistema_2/uploads/imagenes/foto'.$this->session->userdata('login_cuil').'.jpg';
+            if (file_exists($foto)){
+                echo "<img src='".base_url()."/uploads/imagenes/foto".$this->session->userdata('login_cuil').'.jpg'."'  width='50' height='50'>";
+            }
+            else{
+                echo "foto NO Subida";
+            }} ?>
+        <ul>
+            <li ><a><?php if ($this->session->userdata('login_persona')=="user"){
+                                echo "CUIL: ".$this->session->userdata('login_cuil')."</br>";
+                                echo "APELLIDO: ".$this->session->userdata('login_apellido')."</br>";
+                                echo "NOMBRE: ".$this->session->userdata('login_nombre')."</br>";
+                                echo "EMAIL: ".$this->session->userdata('login_email')."</br>";  
+                            }elseif ($this->session->userdata('login_persona')=="organizacion"){
+                                echo "CUIL/CUIT: ".$this->session->userdata('login_cuit')."</br>";
+                                echo "RAZON: ".$this->session->userdata('login_razon')."</br>";
+                                echo "EMAIL: ".$this->session->userdata('login_email')."</br>";
+                            }?></a></li>  
+            <li>
+                <?php  if($this->session->userdata('login_persona')=="user"){
+		    $cv='/var/www/nuevo_sistema_2/uploads/cvs/cv'.$this->session->userdata('login_cuil').'.pdf';
+                    if (file_exists($cv)){
+                        echo "<a href=".base_url()."uploads/cvs/cv".$this->session->userdata('login_cuil').".pdf title='Ver CV'>Ver CV</a>";
+                    }
+                    else{
+                        echo "CV en PDF NO Subido";
+                    }} ?>
+            </li>
+        </ul>
+    </li>
+     <?php $conv=$this->data_model->ConvocatoriaVigente();  
+     if($conv!="" and $this->session->userdata('login_persona')=="user" ){
+     echo '<label style="color:blue;" title="mensaje">Se encuentra abierta la convocatoria: '.$conv.'</label>';
+     };?>
+</ul>
+</div>
+<!--Navigation layout begin -->

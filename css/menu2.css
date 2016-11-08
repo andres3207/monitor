@@ -1,0 +1,177 @@
+#navi {  
+	list-style:none;
+	margin:0;
+	margin-bottom: 10px;
+	padding-bottom:1px;
+	padding-top: 1px;
+	padding-left: 1px;
+	background-color:#eaeaea;
+	vertical-align: middle;
+	clear: both;
+}
+#navi li {
+	margin:1px;
+	padding:0px;
+	display:inline-block; //para eliminar el comportamiento de elemento de bloque(salto de linea)
+
+}
+
+#navi li a {
+	display:block;
+	padding:10px 10px;
+	text-decoration:none;
+	text-align:center;
+	color:black;
+	background-color:#dadada;
+	}
+
+#navi li a:hover {
+	color:white;
+	background-color:#191497;
+	
+}
+
+/**NUEVO CATEGORIAS**/
+.cat-children {  
+	list-style:none;
+	margin:0;
+	margin-bottom: 10px;
+	padding-bottom:1px;
+	padding-top: 1px;
+	padding-left: 1px;
+	background-color:#eaeaea;
+	vertical-align: middle;
+	clear: both;
+	
+}
+
+.cat-children ul{
+display: inline-block;
+
+}
+
+.cat-children li {
+margin:1px;
+padding:0px;
+	/*display:inline-block; //para eliminar el comportamiento de elemento de bloque(salto de linea)*/
+
+}
+
+.cat-children li.item-title{
+margin:0px;
+padding:0px;
+display:inline-block; //para eliminar el comportamiento de elemento de bloque(salto de linea)*/
+
+}
+
+.cat-children li a {
+	display:block;
+	padding:5px 5px;
+	text-decoration:none;
+	text-align:center;
+	color:black;
+	background-color:#dadada;
+
+	}
+
+.cat-children li a:hover {
+	color:white;
+	background-color:#191497;
+
+}
+
+/* Estilos #nav-mobile y lo ocultamos */
+#nav-mobile{
+    display: none;
+    background: url(nav.png) no-repeat center center;
+    float: right;
+    width: 60px;
+    height: 60px;
+   position: relative;
+    right: 0;
+    top:0;
+    opacity: .6;
+}
+ 
+    /* Agregaremos esta clase a #nav-mobile, cuando el menu mobile haya sido desplegado */
+    #nav-mobile.nav-active{
+        opacity: 1;
+    }
+
+@media only screen and (max-width: 768px) {
+ 
+    /* mostramos #nav-mobile */
+    #nav-mobile { display: block; }
+ 
+    /* Fijamos nuestro nav en 100% ancho y dejamos de flotarlo */
+    #menu2{
+        width: 100%;
+        float: none;
+        padding-top: 0px;
+    }
+ 
+        /* Convertimos nuestra lista de enlaces en un menÃº horizontal */
+        #menu2 ul{
+           max-height: 0;
+           overflow: hidden;
+        }
+            /* estilos para los LI del menu */
+            #menu2 li{
+                background: #33363b;
+                border-bottom: 1px solid #282b30;
+                float: none;
+            }
+                /* Quitamos el borde del ultimo item del menÃº */
+                #menu2 li:last-child{ border-bottom: 0;}
+ 
+                #menu2 li a{
+                    padding: 15px 0;
+                    height: auto;
+                    line-height: normal;
+                }
+                #menu2 li a:hover{background:#2a2d33}
+ 
+        /* Agregamos una animaciÃ³n al despligue del menÃº */
+       
+        #menu2 ul.open-menu{
+            max-height: 400px;
+            -webkit-transition: max-height .4s;
+            -moz-transition: max-height .4s;
+            -ms-transition: max-height .4s;
+            -o-transition: max-height .4s;
+            transition: max-height .4s;
+        }
+}
+/**fin-menu-superior-categorias**/
+
+.category-listestudiantes div.cat-children ul{
+
+
+}
+
+.category-listestudiantes div.cat-children li{
+
+}
+.category-listacademica div.cat-children li{
+display:inline-block;
+}
+
+div.cat-children li{
+display:inline-block;
+}
+.category-listestudiantes div.cat-children ul li a:hover  { background-color: red; }
+
+
+/****acordion******/
+#accordion-resizer {
+  /*padding: 10px;*/
+  width: 700px;
+  height: 600px;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+#accordion-container-estudiantes div.attachmentsContainer{
+display: none;
+}

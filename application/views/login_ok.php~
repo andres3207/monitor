@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+ 	<title>Sistema Integral de Gestión de Proyectos de Extensión | UNMdP</title>
+ 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" >
+ 	<meta name="description" content="Login Sistema integral de gestion de proyectos" />
+ 	<!--<meta name="keywords" content="extension, proyectos, convocatoria, subsidio, unicen, voluntariado, ppua" /> -->
+   	<link href="<?php echo base_url();?>css/general_evaluadores.css" media="screen,print" rel="stylesheet" type="text/css" /> 
+ 
+
+
+
+</head>
+
+<script>
+function myFunction() {
+    confirm("Press a button!");
+}
+</script>
+<style>
+
+table, th, td {
+
+    border: 1px solid black;
+
+    border-collapse: collapse;
+
+}
+
+</style>
+<body>
+<?php
+  //print_r($datos['bitacora']);exit();
+  if($this->session->userdata('login_persona')=="admin"){
+  echo "Logueado como admin</br>";
+  echo "Bitacora:";
+  $cant_registros=count($datos['bitacora']);
+
+  echo "<table class='table'>";
+  echo "<thead>";
+  echo "<tr>";
+  echo "<th>Nº de registro</th>";
+  echo "<th>Tipo de mensaje</th>";
+  echo "<th>Mensaje</th>";
+  echo "<th>Quien</th>";
+  echo "<th>Cuando</th>";
+  echo "</tr>";
+  echo "</thead>";
+  echo "<tbody>";
+  for ($i=0;$i<$cant_registros;$i++){
+  
+  echo "<tr>";
+  echo "<td>".($i+1)."</td>";
+  echo "<td>".$datos['bitacora'][$i]["tipo"]."</td>";
+  echo "<td>".$datos['bitacora'][$i]["descripcion"]."</td>";
+  echo "<td>".$datos['bitacora'][$i]["quien"]."</td>";
+  echo "<td>".$datos['bitacora'][$i]["cuando"]."</td>";
+  echo "</tr>";
+  }
+  echo "</tbody>";
+  echo "</table>";
+
+  }else{
+  if($this->session->userdata('login_persona')=="user"){
+  
+  echo "Nombre: ".$this->session->userdata('login_nombre')."</br>";
+  echo "Apellido: ".$this->session->userdata('login_apellido')."</br>";
+  //echo "Dependencia: ".$this->session->userdata('login_depend')."</br>";
+  echo "Cuil: ".$this->session->userdata('login_cuil')."</br>";
+  echo "E-mail: ".$this->session->userdata('login_email')."</br>";
+  $cv='/var/www/nuevo_sistema_2/uploads/cvs/cv'.$this->session->userdata('login_cuil').'.pdf';
+  if (file_exists($cv)){
+     echo "<a href=".base_url()."uploads/cvs/cv".$this->session->userdata('login_cuil').".pdf title='Ver CV'>Ver CV</a>";
+  }else{
+     echo "CV en PDF NO Subido";
+     }
+  }elseif($this->session->userdata('login_persona')=="organizacion"){
+  
+  echo "Nombre: ".$this->session->userdata('login_nombre')."</br>";
+  echo "Apellido del representante: ".$this->session->userdata('rep_apellido')."</br>";
+  echo "Nombre del representante: ".$this->session->userdata('rep_nombre')."</br>";
+  //echo "Dependencia: ".$this->session->userdata('login_depend')."</br>";
+  echo "Cuit: ".$this->session->userdata('login_cuit')."</br>";
+  }
+  
+  echo "</br>";
+  $cant_solicitudes=count($datos['solicitudes']);
+  
+  
+  echo "Solicitudes de proyectos:";
+  echo "</br>";
+  if ($cant_solicitudes==0){
+  echo "No hay solicitudes pendientes";
+  }else{
+  echo "<table class='table'>";
+  echo "<tr>";
+  echo "<td>Nº de peticion</td>";
+  echo "<td>Director del proyecto</td>";
+  echo "<td>Nombre del proyecto</td>";
+  echo "<td>Rol</td>";
+  echo "<tr>";
+  for ($i=0;$i<$cant_solicitudes;$i++){
+  
+  echo "<tr>";
+  echo "<td>".($i+1)."</td>";
+  echo "<td>".$datos['solicitudes'][$i]["director_nombre"]."</td>";
+  echo "<td>".$datos['solicitudes'][$i]["nombre_proyecto"]."</td>";
+  echo "<td>".$datos['solicitudes'][$i]["rol"]."</td>";
+  echo "<td>";
+  echo "<form action='login_ok/aceptar' method='post'>";
+  echo "<input id='solicitud' name='solicitud' value='".$datos['solicitudes'][$i]['id']."' hidden>";
+  echo "<input type='submit' id='btn_aceptar' value='Aceptar'>";
+  echo "</form>";
+  echo "</td>";
+  echo "<td>";
+  echo "<form action='login_ok/rechazar' method='post'>";
+  echo "<input id='solicitud' name='solicitud' value='".$datos['solicitudes'][$i]['id']."' hidden>";
+  echo "<input type='submit' id='btn_rechazar' value='Rechazar'>";
+  echo "</form>";
+  echo "</td>";
+  echo "<tr>";
+  }
+  echo "</table>";
+  }
+  
+  echo "</br>";
+  $cant_notificaciones=count($datos['notificaciones']);
+  
+  
+  echo "Notificaciones:";
+  echo "</br>";
+  if ($cant_notificaciones==0){
+  echo "No hay notificaciones pendientes";
+  }else{
+  echo "<table class='table'>";
+  echo "<tr>";
+  echo "<td>Nº de notificacion</td>";
+  echo "<td>De</td>";
+  echo "<td>Para</td>";
+  echo "<td>Mensaje</td>";
+  echo "<tr>";
+  for ($i=0;$i<$cant_notificaciones;$i++){
+  
+  echo "<tr>";
+  echo "<td>".($i+1)."</td>";
+  echo "<td>".$datos['notificaciones'][$i]["de"]."</td>";
+  echo "<td>".$datos['notificaciones'][$i]["para"]."</td>";
+  echo "<td>".$datos['notificaciones'][$i]["mensaje"]."</td>";
+  echo "<td>";
+  echo "<form action='login_ok/noti_vista' method='post'>";
+  echo "<input id='notificacion' name='notificacion' value='".$datos['notificaciones'][$i]['id']."' hidden>";
+  echo "<input type='submit' id='btn_visto' value='Visto'>";
+  echo "</form>";
+  echo "</td>";
+  echo "<tr>";
+  }
+  echo "</table>";
+  }
+  }
+?>
+
+
+ 
+</body>
+ </html>
