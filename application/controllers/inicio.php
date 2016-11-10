@@ -7,11 +7,15 @@ class inicio extends CI_Controller {
 
    public function index()
    {
-   	$data['section_title']='REDACCIÓN DE NOTICIAS';
+
+   	$datos=$this->data_model->Datos();
+   	//print_r($datos);exit();
+
+   	$data['section_title']='Sistema de Monitoreo';
 
 		$data['layout_navigation']=$this->load->view('layout_navigation',NULL,TRUE);
 
-		$data['layout_body']=$this->load->view('inicio',array("data"=>$data),TRUE);
+		$data['layout_body']=$this->load->view('inicio',array("datos"=>$datos),TRUE);
 
 		$this->load->view('layout_sin_sidebar',array("data"=>$data),FALSE);
 	//exit();

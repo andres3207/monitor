@@ -1,6 +1,12 @@
 <?php
  class data_model extends CI_Model
  {
+
+ 	function Datos(){
+ 		$consulta="SELECT * From datos WHERE 1";
+ 		$query = $this->db->query($consulta);
+ 		return $query->result_array();
+ 	}
 	function ValidarUsuario($cuil,$password)
 	{  /* //   Consulta Mysql para buscar en la tabla Usuario aquellos usuarios que coincidan con el mail y password ingresados en pantalla de login
 		$query = $this->db->where('dni',$dni);

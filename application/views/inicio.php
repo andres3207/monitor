@@ -20,48 +20,42 @@ jQuery(document).ready(function() {
 
 </style>
 
-<?php echo form_open('crear_noticia/guardar',array('id' => 'password'));?>
+<?php
+$cant_reg=count($datos);
+//echo $cant_reg;
+//exit();
+?>
 
 <div class="container">
 <div class="form-horizontal">
-<h2>Noticia:</h2>
+<h2>Datos:</h2>
 <div class="form-group">
-<div class="col-md-9"><p><textarea id="noticia" name="noticia" class="form-control" rows="5" required></textarea></p></div>
+<div class="col-md-9"><p>
+
+<table class='table'>
+	<tr>
+	<td>Temperatura</td>
+	<td>Humedad</td>
+	<td>Fecha</td>
+	</tr>
+	<?php
+	for ($i=0; $i <$cant_reg ; $i++) { 
+		echo "<tr>";
+		echo "<td>".$datos[$i]["temperatura"]."</td>";
+		echo "<td>".$datos[$i]["humedad"]."</td>";
+		echo "<td>".$datos[$i]["cuando"]."</td>";
+		echo "</tr>";
+	}
+	?>
+</table>
+
+</p></div>
 </div>
 
-<p><input type="submit" value="Guardar" class="btn btn-success"></p>
 
 </div>
 </div>
 
 
-<!--
-<?php echo form_label('Noticia: ', 'noti');?><?php echo "</br><textarea id='noticia' name='noticia' required></textarea>";?>
 
-<p>&nbsp;</p>
-
-
-
-<?php
-
-if ($this->session->userdata('login_tipo')==5){
-	echo'<input type="button" value="Enviar" disabled>';
-}
-else{
-	$data = array(
-		 'name' => 'button',
-		 'id' => 'button',
-		 'value' => 'true',
-		 'type' => 'submit',
-		 'content' => 'Guardar',
-		 'class' => 'btn btn-success',
-
- 	 );
-
-	echo form_button($data);
-}
-?>
-</p>
-<p>&nbsp;</p> -->
-<?php echo form_close(); ?>
 
