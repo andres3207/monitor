@@ -8,7 +8,8 @@ class inicio extends CI_Controller {
    public function index()
    {
 
-   	$datos=$this->data_model->Datos();
+   	$datos["datos"]=$this->data_model->Datos();
+   	$datos["limites"]=$this->data_model->CargarLimites();
    	//print_r($datos);exit();
 
    	$data['section_title']='Sistema de Monitoreo';

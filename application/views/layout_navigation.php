@@ -15,6 +15,8 @@
 <div  >
 <ul  id='menu-bar' >
 	<li><a href="<?=base_url()?>inicio" title="Inicio" ><h6>Inicio</h6></a></li>
+    <li><a href="<?=base_url()?>configuracion" title="Configuracion" ><h6>Configuracion</h6></a></li>
+
 	<li><a href="#" title="Perfil" ><h6>Perfil</h6></a>
         <ul class='nav navbar-nav'>
 	  <?php

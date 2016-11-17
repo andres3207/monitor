@@ -7,6 +7,17 @@
  		$query = $this->db->query($consulta);
  		return $query->result_array();
  	}
+
+ 	function ActualizarLimites($t_min,$t_max,$h_min,$h_max){
+ 		$consulta="UPDATE configuracion set t_min='".$t_min."',t_max='".$t_max."',h_min='".$h_min."',h_max='".$h_max."' WHERE id=1";
+ 		$query = $this->db->query($consulta);
+ 		//return $query->result_array();
+ 	}
+ 	function CargarLimites(){
+ 		$consulta="SELECT t_min,t_max,h_min,h_max From configuracion WHERE id=1";
+ 		$query = $this->db->query($consulta);
+ 		return $query->row_array();
+ 	}
 	function ValidarUsuario($cuil,$password)
 	{  /* //   Consulta Mysql para buscar en la tabla Usuario aquellos usuarios que coincidan con el mail y password ingresados en pantalla de login
 		$query = $this->db->where('dni',$dni);

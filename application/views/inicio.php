@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
 </style>
 
 <?php
-$cant_reg=count($datos);
+$cant_reg=count($datos["datos"]);
 //echo $cant_reg;
 //exit();
 ?>
@@ -34,16 +34,31 @@ $cant_reg=count($datos);
 
 <table class='table'>
 	<tr>
-	<td>Temperatura</td>
-	<td>Humedad</td>
-	<td>Fecha</td>
+	<td><p>Temperatura</p></td>
+	<td><p>Humedad</p></td>
+	<td><p>Fecha</p></td>
 	</tr>
 	<?php
 	for ($i=0; $i <$cant_reg ; $i++) { 
 		echo "<tr>";
-		echo "<td>".$datos[$i]["temperatura"]."</td>";
-		echo "<td>".$datos[$i]["humedad"]."</td>";
-		echo "<td>".$datos[$i]["cuando"]."</td>";
+		if ($datos["datos"][$i]["temperatura"]<=$datos["limites"]["t_min"]) {
+			echo "<td class='info'><p>".$datos["datos"][$i]["temperatura"]."</p></td>";
+		}elseif ($datos["datos"][$i]["temperatura"]<=$datos["limites"]["t_max"]) {
+			echo "<td class='success'><p>".$datos["datos"][$i]["temperatura"]."</p></td>";
+		}else{
+			echo "<td class='danger'><p>".$datos["datos"][$i]["temperatura"]."</p></td>";
+		}
+
+		if ($datos["datos"][$i]["humedad"]<=$datos["limites"]["h_min"]) {
+			echo "<td class='info'><p>".$datos["datos"][$i]["humedad"]."</p></td>";
+		}elseif ($datos["datos"][$i]["humedad"]<=$datos["limites"]["h_max"]) {
+			echo "<td class='success'><p>".$datos["datos"][$i]["humedad"]."</p></td>";
+		}else{
+			echo "<td class='danger'><p>".$datos["datos"][$i]["humedad"]."</p></td>";
+		}
+		//echo "<td>".$datos["datos"][$i]["temperatura"]."</td>";
+		//echo "<td>".$datos["datos"][$i]["humedad"]."</td>";
+		echo "<td><p>".$datos["datos"][$i]["cuando"]."</p></td>";
 		echo "</tr>";
 	}
 	?>
