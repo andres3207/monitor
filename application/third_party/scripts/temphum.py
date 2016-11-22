@@ -31,6 +31,8 @@ file = open('temp', 'r')
 file2 = open('hum', 'r')
 temp = file.read()
 hum = file2.read()
+file.close()
+file2.close()
 #temp=random.randrange(100)
 #hum=random.randrange(100)
 
