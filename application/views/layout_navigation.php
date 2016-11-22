@@ -16,43 +16,7 @@
 <ul  id='menu-bar' >
 	<li><a href="<?=base_url()?>inicio" title="Inicio" ><h6>Inicio</h6></a></li>
     <li><a href="<?=base_url()?>configuracion" title="Configuracion" ><h6>Configuracion</h6></a></li>
-
-	<li><a href="#" title="Perfil" ><h6>Perfil</h6></a>
-        <ul class='nav navbar-nav'>
-	  <?php
-	   echo "<li ><a href='".base_url()."password' title='Cambiar contraseña' ><h6>Cambiar contraseña</h6></a></li>";
-
-	  echo "<li ><a href='".base_url()."edit_perfil/index/' title='Editar Perfil' > <h6>Editar Perfil</h6> </a></li>";
-      echo "<li ><a href='".base_url()."foto_cv/index/' title='Subir foto y cv' > <h6>Subir Foto y CV</h6> </a></li>";
-
-
-      ?>
-        </ul>
-    </li>
-    <li><a href="#" title="Estructura Organizacional" > <h6>Estructura Organizacional</h6></a>
-    <ul class='nav navbar-nav'>
-         <?php 
-            echo "<li><a href='".base_url()."estructuras/MisCentros/' title='Mis Centros'><h6>Mis Centros</h6></a></li>";
-            echo "<li><a href='".base_url()."estructuras/MisProgramas/' title='Mis Programas'><h6>Mis Programas</h6></a></li>";
-            echo "<li><a href='".base_url()."estructuras/MisGrupos/' title='Mis Grupos'><h6>Mis Grupos</h6></a></li>";
-            echo "<li><a href='".base_url()."estructuras/TodosCentros/' title='Todos los Centros'><h6>Todos los Centros</h6></a></li>";
-            echo "<li><a href='".base_url()."estructuras/TodosProgramas/' title='Todos los Programas'><h6>Todos los Programas</h6></a></li>";
-            echo "<li><a href='".base_url()."estructuras/TodosGrupos/'' title='Todos los Grupos'><h6>Todos los Grupos</h6></a></li>";
-            /*if($this->data_model->SoyDocente($this->session->userdata('login_id'))){
-    echo "<li><a href='".base_url()."index.php/eorga' title='Crear nueva E.O.'>Crear nueva E.O.</a></li>";
-    echo "<li><a href='".base_url()."index.php/mis_eo' title='Mis E.O.'>Mis E.O.</a></li>";
-     }*/   ?>
-     <!-- <li ><a href="<?=base_url()?>todos_eo" title="Todas las E.O." ><h6>Todas las E.O.</h6></a></li>-->
-        </ul>
-    </li>
-
-
-
-
-
-
-
-
+    <li><a href="<?=base_url()?>alarmas" title="Alarmas emitidas" ><h6>Alarmas emitidas</h6></a></li>
 
 </ul>
 </div>

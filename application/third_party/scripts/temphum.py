@@ -27,9 +27,12 @@ def run_query(query=''):
 
 
 
-
-temp=random.randrange(100)
-hum=random.randrange(100)
+file = open('temp', 'r')
+file2 = open('hum', 'r')
+temp = file.read()
+hum = file2.read()
+#temp=random.randrange(100)
+#hum=random.randrange(100)
 
 query="INSERT INTO datos (temperatura, humedad) VALUES ('%s','%s')" %(temp,hum)
 

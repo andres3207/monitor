@@ -71,10 +71,10 @@ echo $data['layout_navigation'] ;        ?>
  
  <img class="img-responsive" src="<?php echo base_url();?>img/logo_gabo_2.jpg" width="1200" height="100"> -->
 <div id='footer' style="height:170px; width:1200px;background-image: url('../img/logo.jpg');">
-    <h5 style='margin-top: 75px;padding:20px;'>	Secretaría de Extensión | Universidad Nacional de Mar del Plata.
-	Diag. Alberdi 2695 4to piso, Mar del Plata. Buenos Aires. Argentina. <br />
+    <h5 style='margin-top: 75px;padding:20px;'>	TECNOCADA  
+	Av. Brown 2650, Olavarria. Buenos Aires. Argentina. <br />
 
-Consultas: Tel: (0223) 492-1700/05 interno 176 / 17 - secexten@mdp.edu.ar
+Consultas: Tel: (02284) 15652604 - TECNOCADA@hotmail.com
         </h5>
         
     </div>

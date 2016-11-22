@@ -29,8 +29,20 @@ $cant_reg=count($datos["datos"]);
 <div class="container">
 <div class="form-horizontal">
 <h2>Datos:</h2>
+<form action='inicio' method="POST">
+<h3>Filtrar por fecha</h3>
 <div class="form-group">
-<div class="col-md-9"><p>
+<label class='col-md-2 text-left'><p>Desde:<span>aaaa-mm-dd</span></p></label>
+<div class="col-md-2"><p><input type='text' class="form-control" id="desde" name="desde"></input></p></div>
+<div class="col-md-1"></div>
+<label class='col-md-2'><p>Hasta:<span>aaaa-mm-dd</span></p></label>
+<div class="col-md-2"><p><input type='text' class="form-control" id="hasta" name="hasta"></input></p></div>
+<div class="col-md-1"><input type="submit" name="mostrar" class="btn btn-info" value="Mostrar"></div>
+<div class="col-md-1"><input type="submit" name="mostrar" class="btn btn-info" value="Descargar"></div>
+</div>
+</form>
+<div class="form-group">
+<div class="col-md-12"><p>
 
 <table class='table'>
 	<tr>
@@ -61,9 +73,20 @@ $cant_reg=count($datos["datos"]);
 		echo "<td><p>".$datos["datos"][$i]["cuando"]."</p></td>";
 		echo "</tr>";
 	}
+
+	
 	?>
 </table>
 
+<?php
+for ($i=0; $i < $cant_reg; $i++) { 
+		echo "<input type='text' id='id-".$i."' name='id-".$i."' value='".$datos["datos"][$i]["id"]."' hidden>";
+		echo "<input type='text' id='temp-".$i."' name='temp-".$i."' value='".$datos["datos"][$i]["temperatura"]."' hidden>";
+		echo "<input type='text' id='hum-".$i."' name='hum-".$i."' value='".$datos["datos"][$i]["humedad"]."' hidden>";
+		echo "<input type='text' id='fecha-".$i."' name='fecha-".$i."' value='".$datos["datos"][$i]["cuando"]."' hidden>";
+	}
+
+	?>
 </p></div>
 </div>
 

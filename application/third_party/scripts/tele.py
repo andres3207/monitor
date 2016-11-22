@@ -62,13 +62,14 @@ def handle(msg):
          hum=todos[0][2]
          fecha=todos[0][3]
          #formato="a las %H:%M:%S del dia %d/%m/%Y"
-         formato="%H:%M:%S %d/%m/%Y"
+         formato="%d/%m/%Y %H:%M:%S"
          fecha=fecha.strftime(formato)
          #print type(fecha)
          #msg="La ultima temperatura y humedad registrados fueron de %s grados y %s%% %s" %(temp,hum,fecha)
-         msg=(50*"-")+chr(10)+chr(13)+"| TEMPERATURA "+19*" "+str(temp)+" | "+chr(10)+chr(13)+50*"-"+chr(10)+chr(13)+"| HUMEDAD  "+28*" "+str(hum)+" | "+chr(10)+chr(13)+50*"-"+chr(10)+chr(13)+"| FECHA  "+str(fecha)+" | "+chr(10)+chr(13)+50*"-"
+         #msg=(50*"-")+chr(10)+chr(13)+"| TEMPERATURA "+19*" "+str(temp)+" | "+chr(10)+chr(13)+50*"-"+chr(10)+chr(13)+"| HUMEDAD  "+28*" "+str(hum)+" | "+chr(10)+chr(13)+50*"-"+chr(10)+chr(13)+"| FECHA  "+str(fecha)+" | "+chr(10)+chr(13)+50*"-"
          #msg="<b>HOLA</b>"
          #print(len("| TEMPERATURA "+str(temp)))
+         msg="TEMPERATURA = "+str(temp)+chr(10)+chr(13)+"HUMEDAD = "+str(hum)+chr(10)+chr(13)+"FECHA = "+str(fecha)
          bot.sendMessage(chat_id,msg)
          #print(msg)
       elif(msg_rec=="alta "+NUMERO_SERIE):
