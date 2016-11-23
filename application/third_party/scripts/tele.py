@@ -78,6 +78,15 @@ def handle(msg):
          query="UPDATE usuarios set habilitado=0 where chat_id="+str(chat_id)
          resp=run_query(query)
          bot.sendMessage(chat_id,"Usuario dado de baja"+chr(10)+chr(13)+"puede volver a darse de alta en el futuro")
+      elif(msg_rec=="actual"):
+         file = open('/var/www/web/monitor/application/third_party/scripts/temp', 'r')
+         file2 = open('/var/www/web/monitor/application/third_party/scripts/hum', 'r')
+         temp = file.read()
+         hum = file2.read()
+         file.close()
+         file2.close()
+         msg="TEMPERATURA = "+str(temp)+chr(10)+chr(13)+"HUMEDAD = "+str(hum)
+         bot.sendMessage(chat_id,msg)
       else:
          bot.sendMessage(chat_id,"Comando no reconocido")
    
