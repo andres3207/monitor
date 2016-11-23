@@ -15,6 +15,11 @@
  		$query = $this->db->query($consulta);
  		return $query->result_array();
  	}
+ 	function Alertas(){
+ 		$consulta="SELECT * from alertas WHERE 1";
+ 		$query = $this->db->query($consulta);
+ 		return $query->result_array();
+ 	}
 
  	function ActualizarLimites($t_min,$t_max,$h_min,$h_max){
  		$consulta="UPDATE configuracion set t_min='".$t_min."',t_max='".$t_max."',h_min='".$h_min."',h_max='".$h_max."' WHERE id=1";
