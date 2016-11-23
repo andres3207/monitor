@@ -27,8 +27,8 @@ def run_query(query=''):
 
 
 
-file = open('temp', 'r')
-file2 = open('hum', 'r')
+file = open('/var/www/web/monitor/application/third_party/scripts/temp', 'r')
+file2 = open('/var/www/web/monitor/application/third_party/scripts/hum', 'r')
 temp = file.read()
 hum = file2.read()
 file.close()
