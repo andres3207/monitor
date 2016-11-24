@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "inicio";
+$route['default_controller'] = "tiemporeal";
 $route['404_override'] = '404';
 
 
