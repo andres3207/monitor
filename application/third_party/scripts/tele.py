@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+
 import MySQLdb
 import telepot
 import time
@@ -86,6 +87,71 @@ def handle(msg):
          file.close()
          file2.close()
          msg="TEMPERATURA = "+str(temp)+chr(10)+chr(13)+"HUMEDAD = "+str(hum)
+         bot.sendMessage(chat_id,msg)
+      elif(msg_rec=="umbrales"):
+         query="SELECT MAX(id) from configuracion WHERE 1"
+         n=run_query(query)
+         n=n[0][0]
+         #print n
+         query="SELECT * FROM configuracion WHERE id='%s'"%n
+         umbrales=run_query(query)
+         #print umbrales
+         Tmin=umbrales[0][1]
+         Tmax=umbrales[0][2]
+         Hmin=umbrales[0][3]
+         Hmax=umbrales[0][4]
+         #print Tmax
+         msg="UMBRALES CONFIGURADOS:"+chr(10)+chr(13)+"Temp. min. = "+str(Tmin)
+         msg=msg+chr(10)+chr(13)+"Temp. max. = "+str(Tmax)
+         msg=msg+chr(10)+chr(13)+"Hum. min. = "+str(Hmin)
+         msg=msg+chr(10)+chr(13)+"Hum. max. = "+str(Hmax)
+         bot.sendMessage(chat_id,msg)
+      elif(msg_rec[0:12]=="config tmax "):
+         tmax=msg_rec[12:]
+         query="SELECT MAX(id) from configuracion WHERE 1"
+         n=run_query(query)
+         n=n[0][0]
+         query="UPDATE configuracion set t_max='%s' WHERE id='%s'"%(tmax,n)
+         rta=run_query(query)
+         query="SELECT t_max FROM configuracion WHERE id='%s'"%n
+         tmax=run_query(query)
+         msg="Temp. max configurada en "+str(tmax[0][0])
+         bot.sendMessage(chat_id,msg)
+         #print rta
+      elif(msg_rec[0:12]=="config tmin "):
+         tmin=msg_rec[12:]
+         query="SELECT MAX(id) from configuracion WHERE 1"
+         n=run_query(query)
+         n=n[0][0]
+         query="UPDATE configuracion set t_min='%s' WHERE id='%s'"%(tmin,n)
+         rta=run_query(query)
+         query="SELECT t_min FROM configuracion WHERE id='%s'"%n
+         tmin=run_query(query)
+         msg="Temp. min configurada en "+str(tmin[0][0])
+         bot.sendMessage(chat_id,msg)
+         #print rta
+      elif(msg_rec[0:12]=="config hmax "):
+         hmax=msg_rec[12:]
+         query="SELECT MAX(id) from configuracion WHERE 1"
+         n=run_query(query)
+         n=n[0][0]
+         query="UPDATE configuracion set h_max='%s' WHERE id='%s'"%(hmax,n)
+         rta=run_query(query)
+         query="SELECT h_max FROM configuracion WHERE id='%s'"%n
+         hmax=run_query(query)
+         msg="Hum. max configurada en "+str(hmax[0][0])
+         bot.sendMessage(chat_id,msg)
+         #print rta
+      elif(msg_rec[0:12]=="config hmin "):
+         hmin=msg_rec[12:]
+         query="SELECT MAX(id) from configuracion WHERE 1"
+         n=run_query(query)
+         n=n[0][0]
+         query="UPDATE configuracion set h_min='%s' WHERE id='%s'"%(hmin,n)
+         rta=run_query(query)
+         query="SELECT h_min FROM configuracion WHERE id='%s'"%n
+         hmin=run_query(query)
+         msg="Hum. min configurada en "+str(hmin[0][0])
          bot.sendMessage(chat_id,msg)
       else:
          bot.sendMessage(chat_id,"Comando no reconocido")
