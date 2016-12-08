@@ -2109,11 +2109,19 @@ h5{  /**/
 h6 { 
     display: block;
     font-size: 18px;
+    font-family: SourceSansPro-Semibold;
+
+}
+/*
+h6 { 
+    display: block;
+    font-size: 18px;
     font-weight: lighter;
     font-family: "SourceSansPro";
     font-style: normal;
     src: local("?"), url("../fuentes/SourceSansPro-Lightit.otf") format("opentype");
 }
+*/
 p { 
     display: block;
     font-size: 18px;

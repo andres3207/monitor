@@ -4,6 +4,7 @@
 import MySQLdb
 import telepot
 import time
+import netifaces
 
 
 
@@ -152,6 +153,17 @@ def handle(msg):
          query="SELECT h_min FROM configuracion WHERE id='%s'"%n
          hmin=run_query(query)
          msg="Hum. min configurada en "+str(hmin[0][0])
+         bot.sendMessage(chat_id,msg)
+      elif(msg_rec=="direcciones"):
+         interfaces=netifaces.interfaces()
+         msg="Utilice las siguientes direcciones para acceder al sistema web:"+chr(10)+chr(13)+chr(10)+chr(13)
+         for i in interfaces:
+            addrs = netifaces.ifaddresses(i)
+            direccion= addrs[netifaces.AF_INET][0]["addr"]
+            if i=="eth0":
+               msg=msg+"Desde la red local: http://"+str(direccion)+"/monitor/ "+chr(10)+chr(13)+chr(10)+chr(13)
+            elif i=="wlan0":
+               msg=msg+"Desde la red Wifi del equipo: http://"+str(direccion)+"/monitor/"
          bot.sendMessage(chat_id,msg)
       else:
          bot.sendMessage(chat_id,"Comando no reconocido")

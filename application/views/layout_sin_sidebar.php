@@ -5,8 +5,8 @@
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 	<title>Sistema de Monitoreo de Humedad y Temperatura</title>
 	 <link href="<?php echo base_url();?>css/general.css" media="screen" rel="stylesheet" type="text/css" /> 
-	<link href="<?php echo base_url();?>css/imprimir.css" media="print" rel="stylesheet" type="text/css" />    
-    <link href="<?php echo base_url();?>css/form.css" type="text/css" rel="stylesheet" media="screen" />
+	<!--<link href="<?php echo base_url();?>css/imprimir.css" media="print" rel="stylesheet" type="text/css" />    
+    <link href="<?php echo base_url();?>css/form.css" type="text/css" rel="stylesheet" media="screen" /> -->
     <link href="<?php echo base_url();?>css/menu.css" type="text/css" rel="stylesheet" media="screen" />
    <!-- <link href="<?php echo base_url();?>css/styles.css" type="text/css" rel="stylesheet" media="screen" />-->
 	<script src="<?php echo base_url();?>js/jquery-1.7.2.js" type="text/javascript" ></script>
