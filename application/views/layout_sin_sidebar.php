@@ -11,9 +11,12 @@
    <!-- <link href="<?php echo base_url();?>css/styles.css" type="text/css" rel="stylesheet" media="screen" />-->
 	<script src="<?php echo base_url();?>js/jquery-1.7.2.js" type="text/javascript" ></script>
     <script src="<?php echo base_url();?>js/jquery.validate.min.js" type="text/javascript" ></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+   <link href="<?php echo base_url();?>css/bootstrap.min.css" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+  <script src="<?php echo base_url();?>js/bootstrap.min.js" ></script>
+  <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
 </head>
 <body>
 
@@ -68,9 +71,8 @@ echo $data['layout_navigation'] ;        ?>
     <!--end:content-->
     <!--begin:footer  delete-api-button.png
 
- 
- <img class="img-responsive" src="<?php echo base_url();?>img/logo_gabo_2.jpg" width="1200" height="100"> -->
-<div id='footer' style="height:170px; width:1200px;background-image: url('../img/logo.jpg');">
+-->
+<div id='footer' style="height:170px; width:1200px;">
     <h5 style='margin-top: 75px;padding:20px;'>	TECNOCADA  
 	Av. Brown 2650, Olavarria. Buenos Aires. Argentina. <br />
 

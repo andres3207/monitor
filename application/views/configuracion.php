@@ -1,10 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
- 	<title>Sistema Integral de Gestión de Proyectos de Extensión | UNMdP</title>
+ 	<title>Sistema de Monitoreo de Humedad y Temperatura</title>
  	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" >
- 	<meta name="description" content="Login Sistema integral de gestion de proyectos" />
- 	<!--<meta name="keywords" content="extension, proyectos, convocatoria, subsidio, unicen, voluntariado, ppua" /> -->
+
    	<link href="<?php echo base_url();?>css/general.css" media="screen,print" rel="stylesheet" type="text/css" />
 
 
