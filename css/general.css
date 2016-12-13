@@ -2079,7 +2079,7 @@ h1 { /**/
     font-family: SourceSansPro-Semibold;
     padding-top: 30px;
     padding-bottom: 30px;
-    text-align:left;
+    text-align:center;
       /*font-style: italic;*/
       
 }
@@ -2105,12 +2105,19 @@ h4{   /* txt descriptivo */
 h5{  /**/
    font-family: SourceSansPro-Semibold;
   font-size: 18px;
+  margin-top: 10px !important;
 }
 h6 { 
     display: block;
     font-size: 18px;
     font-family: SourceSansPro-Semibold;
 
+}
+p{ /**/
+   font-family: SourceSansPro-Semibold;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 /*
 h6 { 
@@ -2121,7 +2128,7 @@ h6 {
     font-style: normal;
     src: local("?"), url("../fuentes/SourceSansPro-Lightit.otf") format("opentype");
 }
-*/
+
 p { 
     display: block;
     font-size: 18px;
@@ -2130,6 +2137,7 @@ p {
     font-style: normal;
     src: local("?"), url("../fuentes/SourceSansPro-Lightit.otf") format("opentype");
 }
+*/
 .form-control{
     display: block;
     font-size: 18px;
