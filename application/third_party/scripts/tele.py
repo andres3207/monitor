@@ -39,21 +39,21 @@ def handle(msg):
       n=run_query(query)
       n=n[0][0]
       if n==0:
-         if(msg_rec=="alta "+NUMERO_SERIE):
+         if(msg_rec.lower()=="alta "+NUMERO_SERIE):
             query="INSERT into usuarios (chat_id,habilitado) values ('"+str(chat_id)+"',1)"
             resp=run_query(query)
             bot.sendMessage(chat_id,"CODIGO VALIDO"+chr(10)+chr(13)+"Usuario dado de alta")
          else:
             bot.sendMessage(chat_id,"CODIGO INVALIDO"+chr(10)+chr(13)+"Vuelva a intentar")
       else:
-         if(msg_rec=="alta "+NUMERO_SERIE):
+         if(msg_rec.lower()=="alta "+NUMERO_SERIE):
             query="UPDATE usuarios set habilitado=1 where chat_id="+str(chat_id)
             resp=run_query(query)
             bot.sendMessage(chat_id,"CODIGO VALIDO"+chr(10)+chr(13)+"Usuario dado de alta")
          else:
             bot.sendMessage(chat_id,"CODIGO INVALIDO"+chr(10)+chr(13)+"Vuelva a intentar")
    else:      
-      if msg_rec=="ultimo":
+      if msg_rec.lower()=="ultimo":
          #bot.sendMessage(chat_id,"Hola")
          query="SELECT max(id) FROM datos"
          n=run_query(query)
@@ -74,13 +74,13 @@ def handle(msg):
          msg="TEMPERATURA = "+str(temp)+chr(10)+chr(13)+"HUMEDAD = "+str(hum)+chr(10)+chr(13)+"FECHA = "+str(fecha)
          bot.sendMessage(chat_id,msg)
          #print(msg)
-      elif(msg_rec=="alta "+NUMERO_SERIE):
+      elif(msg_rec.lower()=="alta "+NUMERO_SERIE):
          bot.sendMessage(chat_id,"El usuario ya se encontraba de alta")
-      elif(msg_rec=="baja"):
+      elif(msg_rec.lower()=="baja"):
          query="UPDATE usuarios set habilitado=0 where chat_id="+str(chat_id)
          resp=run_query(query)
          bot.sendMessage(chat_id,"Usuario dado de baja"+chr(10)+chr(13)+"puede volver a darse de alta en el futuro")
-      elif(msg_rec=="actual"):
+      elif(msg_rec.lower()=="actual"):
          file = open('/var/www/web/monitor/application/third_party/scripts/temp', 'r')
          file2 = open('/var/www/web/monitor/application/third_party/scripts/hum', 'r')
          temp = file.read()
@@ -89,7 +89,7 @@ def handle(msg):
          file2.close()
          msg="TEMPERATURA = "+str(temp)+chr(10)+chr(13)+"HUMEDAD = "+str(hum)
          bot.sendMessage(chat_id,msg)
-      elif(msg_rec=="umbrales"):
+      elif(msg_rec.lower()=="umbrales"):
          query="SELECT MAX(id) from configuracion WHERE 1"
          n=run_query(query)
          n=n[0][0]
@@ -107,7 +107,7 @@ def handle(msg):
          msg=msg+chr(10)+chr(13)+"Hum. min. = "+str(Hmin)
          msg=msg+chr(10)+chr(13)+"Hum. max. = "+str(Hmax)
          bot.sendMessage(chat_id,msg)
-      elif(msg_rec[0:12]=="config tmax "):
+      elif(msg_rec[0:12].lower()=="config tmax "):
          tmax=msg_rec[12:]
          query="SELECT MAX(id) from configuracion WHERE 1"
          n=run_query(query)
@@ -119,7 +119,7 @@ def handle(msg):
          msg="Temp. max configurada en "+str(tmax[0][0])
          bot.sendMessage(chat_id,msg)
          #print rta
-      elif(msg_rec[0:12]=="config tmin "):
+      elif(msg_rec[0:12].lower()=="config tmin "):
          tmin=msg_rec[12:]
          query="SELECT MAX(id) from configuracion WHERE 1"
          n=run_query(query)
@@ -131,7 +131,7 @@ def handle(msg):
          msg="Temp. min configurada en "+str(tmin[0][0])
          bot.sendMessage(chat_id,msg)
          #print rta
-      elif(msg_rec[0:12]=="config hmax "):
+      elif(msg_rec[0:12].lower()=="config hmax "):
          hmax=msg_rec[12:]
          query="SELECT MAX(id) from configuracion WHERE 1"
          n=run_query(query)
@@ -143,7 +143,7 @@ def handle(msg):
          msg="Hum. max configurada en "+str(hmax[0][0])
          bot.sendMessage(chat_id,msg)
          #print rta
-      elif(msg_rec[0:12]=="config hmin "):
+      elif(msg_rec[0:12].lower()=="config hmin "):
          hmin=msg_rec[12:]
          query="SELECT MAX(id) from configuracion WHERE 1"
          n=run_query(query)
@@ -154,7 +154,7 @@ def handle(msg):
          hmin=run_query(query)
          msg="Hum. min configurada en "+str(hmin[0][0])
          bot.sendMessage(chat_id,msg)
-      elif(msg_rec=="direcciones"):
+      elif(msg_rec.lower()=="direcciones"):
          interfaces=netifaces.interfaces()
          msg="Utilice las siguientes direcciones para acceder al sistema web:"+chr(10)+chr(13)+chr(10)+chr(13)
          for i in interfaces:
