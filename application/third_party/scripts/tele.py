@@ -81,8 +81,8 @@ def handle(msg):
          resp=run_query(query)
          bot.sendMessage(chat_id,"Usuario dado de baja"+chr(10)+chr(13)+"puede volver a darse de alta en el futuro")
       elif(msg_rec.lower()=="actual"):
-         file = open('/var/www/web/monitor/application/third_party/scripts/temp', 'r')
-         file2 = open('/var/www/web/monitor/application/third_party/scripts/hum', 'r')
+         file = open('/var/www/web/monitor/application/third_party/scripts/temp2', 'r')
+         file2 = open('/var/www/web/monitor/application/third_party/scripts/hum2', 'r')
          temp = file.read()
          hum = file2.read()
          file.close()

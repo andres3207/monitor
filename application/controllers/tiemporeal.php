@@ -10,12 +10,14 @@ class tiemporeal extends CI_Controller {
 
    	//$datos["actuales"]=$this->data_model->CargarDatosActuales();
    	//print_r($datos);exit();
+
+    /*
     $fp1 = fopen("/var/www/web/monitor/application/third_party/scripts/temp", "r");
     $fp2 = fopen("/var/www/web/monitor/application/third_party/scripts/hum", "r");
     $datos["temp"]=fgets($fp1);
     $datos["hum"]=fgets($fp2);
     fclose($fp1);
-    fclose($fp2);
+    fclose($fp2); */
 
     $fp1 = fopen("/var/www/web/monitor/application/third_party/scripts/temp2", "r");
     $fp2 = fopen("/var/www/web/monitor/application/third_party/scripts/hum2", "r");
