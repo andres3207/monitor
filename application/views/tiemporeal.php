@@ -17,6 +17,7 @@ setTimeout('document.location.reload()',5000);
 
 <div class="container">
 <div class="form-horizontal">
+<label>DHT22:</label>
 <div class="form-group">
 <label class='col-md-3 text-left'><p>Temperatura Actual:</p></label>
 <div class="col-md-2"><p><input type='text' class="form-control" id="temp" name="temp" readonly value=<?php echo "'".$datos["temp"]." °C'"; ?>></input></p></div>
@@ -27,6 +28,16 @@ setTimeout('document.location.reload()',5000);
 <div class="col-md-2"><p><input type='text' class="form-control" id="hum" name="hum" readonly value=<?php echo "'".$datos["hum"]." %'"; ?>></input></p></div>
 </div>
 
+<label>SHT71</label>
+<div class="form-group">
+<label class='col-md-3 text-left'><p>Temperatura Actual:</p></label>
+<div class="col-md-2"><p><input type='text' class="form-control" id="temp2" name="temp2" readonly value=<?php echo "'".$datos["temp2"]." °C'"; ?>></input></p></div>
+</div>
+
+<div class="form-group">
+<label class='col-md-3 text-left'><p>Humedad Actual:</p></label>
+<div class="col-md-2"><p><input type='text' class="form-control" id="hum2" name="hum2" readonly value=<?php echo "'".$datos["hum2"]." %'"; ?>></input></p></div>
+</div>
 </div>
 </div>
 

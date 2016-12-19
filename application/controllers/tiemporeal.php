@@ -17,6 +17,13 @@ class tiemporeal extends CI_Controller {
     fclose($fp1);
     fclose($fp2);
 
+    $fp1 = fopen("/var/www/web/monitor/application/third_party/scripts/temp2", "r");
+    $fp2 = fopen("/var/www/web/monitor/application/third_party/scripts/hum2", "r");
+    $datos["temp2"]=fgets($fp1);
+    $datos["hum2"]=fgets($fp2);
+    fclose($fp1);
+    fclose($fp2);
+
    	$data['section_title']='Datos en tiempo real';
 
 		$data['layout_navigation']=$this->load->view('layout_navigation',NULL,TRUE);
