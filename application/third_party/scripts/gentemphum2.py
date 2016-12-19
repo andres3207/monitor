@@ -14,6 +14,9 @@ from datetime import datetime
 
 
 
+time.sleep(10)
+
+
 sensor = 22
 pin = 22
 
