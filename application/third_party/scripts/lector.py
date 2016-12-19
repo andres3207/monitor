@@ -74,71 +74,71 @@ while(1):
    hum = file2.read()
    file.close()
    file2.close()
+   if humidity is not None and temperature is not None:
+      query="SELECT * from configuracion where 1"
+      datos=run_query(query)
 
-   query="SELECT * from configuracion where 1"
-   datos=run_query(query)
+      t_min=datos[0][1]
+      t_max=datos[0][2]
+      h_min=datos[0][3]
+      h_max=datos[0][4]
 
-   t_min=datos[0][1]
-   t_max=datos[0][2]
-   h_min=datos[0][3]
-   h_max=datos[0][4]
+      if (temp<t_min):
+         if(hum<h_min):
+            reporte="temperatura y humedad por debajo"
+            reporte="TEMPERATURA = "+temp+" por debajo del limite configurado de "+str(t_min)+". HUMEDAD = "+hum+" por debajo del limite configurado de "+str(h_min)+"."
+            condicion=0
+         elif((hum>=h_min) and (hum<=h_max)):
+            reporte="temperatura por debajo, humedad ok"
+            reporte="TEMPERATURA = "+temp+" por debajo del limite configurado de "+str(t_min)+". HUMEDAD = "+hum+" dentro del limite configurado de "+str(h_min)+" y "+str(h_max)+"."
+            condicion=1
+         elif(hum>h_max):
+            reporte="temperatura por debajo, humedad por encima"
+            reporte="TEMPERATURA = "+temp+" por debajo del limite configurado de "+str(t_min)+". HUMEDAD = "+hum+" por encima del limite configurado de "+str(h_min)+"."
+            condicion=2
+      elif((temp>=t_min) and (temp<=t_max)):
+         if(hum<h_min):
+            reporte="temperatura ok, humedad por debajo"
+            reporte="TEMPERATURA = "+temp+" dentro del limite configurado de "+str(t_min)+" y "+str(t_max)+". HUMEDAD = "+hum+" por debajo del limite configurado de "+str(h_min)+"."
+            condicion=3
+         elif((hum>=h_min) and (hum<=h_max)):
+            reporte="temperatura ok, humedad ok"
+            reporte="TEMPERATURA = "+temp+" dentro del limite configurado de "+str(t_min)+" y "+str(t_max)+". HUMEDAD = "+hum+" dentro del limite configurado de "+str(h_min)+" y "+str(h_max)+"."
+            condicion=4
+         elif(hum>h_max):
+            reporte="temperatura ok, humedad por encima"
+            reporte="TEMPERATURA = "+temp+" dentro del limite configurado de "+str(t_min)+" y "+str(t_max)+". HUMEDAD = "+hum+" por encima del limite configurado de "+str(h_min)+"."
+            condicion=5
+      elif (temp>t_max):
+         if(hum<h_min):
+            reporte="temperatura por encima, humedad por debajo"
+            reporte="TEMPERATURA = "+temp+" por encima del limite configurado de "+str(t_max)+". HUMEDAD = "+hum+" por debajo del limite configurado de "+str(h_min)+"."
+            condicion=6
+         elif((hum>=h_min) and (hum<=h_max)):
+            reporte="temperatura por encima, humedad ok"
+            reporte="TEMPERATURA = "+temp+" por encima del limite configurado de "+str(t_max)+". HUMEDAD = "+hum+" dentro del limite configurado de "+str(h_min)+" y "+str(h_max)+"."
+            condicion=7
+         elif(hum>h_max):
+            reporte="temperatura por encima, humedad por encima"
+            reporte="TEMPERATURA = "+temp+" por encima del limite configurado de "+str(t_max)+". HUMEDAD = "+hum+" por encima del limite configurado de "+str(h_min)+"."
+            condicion=8
 
-   if (temp<t_min):
-      if(hum<h_min):
-         reporte="temperatura y humedad por debajo"
-         reporte="TEMPERATURA = "+temp+" por debajo del limite configurado de "+str(t_min)+". HUMEDAD = "+hum+" por debajo del limite configurado de "+str(h_min)+"."
-         condicion=0
-      elif((hum>=h_min) and (hum<=h_max)):
-         reporte="temperatura por debajo, humedad ok"
-         reporte="TEMPERATURA = "+temp+" por debajo del limite configurado de "+str(t_min)+". HUMEDAD = "+hum+" dentro del limite configurado de "+str(h_min)+" y "+str(h_max)+"."
-         condicion=1
-      elif(hum>h_max):
-         reporte="temperatura por debajo, humedad por encima"
-         reporte="TEMPERATURA = "+temp+" por debajo del limite configurado de "+str(t_min)+". HUMEDAD = "+hum+" por encima del limite configurado de "+str(h_min)+"."
-         condicion=2
-   elif((temp>=t_min) and (temp<=t_max)):
-      if(hum<h_min):
-         reporte="temperatura ok, humedad por debajo"
-         reporte="TEMPERATURA = "+temp+" dentro del limite configurado de "+str(t_min)+" y "+str(t_max)+". HUMEDAD = "+hum+" por debajo del limite configurado de "+str(h_min)+"."
-         condicion=3
-      elif((hum>=h_min) and (hum<=h_max)):
-         reporte="temperatura ok, humedad ok"
-         reporte="TEMPERATURA = "+temp+" dentro del limite configurado de "+str(t_min)+" y "+str(t_max)+". HUMEDAD = "+hum+" dentro del limite configurado de "+str(h_min)+" y "+str(h_max)+"."
-         condicion=4
-      elif(hum>h_max):
-         reporte="temperatura ok, humedad por encima"
-         reporte="TEMPERATURA = "+temp+" dentro del limite configurado de "+str(t_min)+" y "+str(t_max)+". HUMEDAD = "+hum+" por encima del limite configurado de "+str(h_min)+"."
-         condicion=5
-   elif (temp>t_max):
-      if(hum<h_min):
-         reporte="temperatura por encima, humedad por debajo"
-         reporte="TEMPERATURA = "+temp+" por encima del limite configurado de "+str(t_max)+". HUMEDAD = "+hum+" por debajo del limite configurado de "+str(h_min)+"."
-         condicion=6
-      elif((hum>=h_min) and (hum<=h_max)):
-         reporte="temperatura por encima, humedad ok"
-         reporte="TEMPERATURA = "+temp+" por encima del limite configurado de "+str(t_max)+". HUMEDAD = "+hum+" dentro del limite configurado de "+str(h_min)+" y "+str(h_max)+"."
-         condicion=7
-      elif(hum>h_max):
-         reporte="temperatura por encima, humedad por encima"
-         reporte="TEMPERATURA = "+temp+" por encima del limite configurado de "+str(t_max)+". HUMEDAD = "+hum+" por encima del limite configurado de "+str(h_min)+"."
-         condicion=8
+      if(condicion!=4):
+         query="SELECT MAX(id) FROM alertas WHERE 1"
+         n=run_query(query)
+         n=n[0][0]
 
-   if(condicion!=4):
-      query="SELECT MAX(id) FROM alertas WHERE 1"
-      n=run_query(query)
-      n=n[0][0]
+         query="SELECT cuando,condicion FROM alertas WHERE id="+str(n)
+         resultado=run_query(query)
+         fecha=resultado[0][0]
+         ultima_condicion=resultado[0][1]
+         #print fecha
+         #print ultima_condicion
+         ahora=datetime.now()
+         delta = ahora - fecha
+         #print delta
+         diferencia=delta.total_seconds()
 
-      query="SELECT cuando,condicion FROM alertas WHERE id="+str(n)
-      resultado=run_query(query)
-      fecha=resultado[0][0]
-      ultima_condicion=resultado[0][1]
-      #print fecha
-      #print ultima_condicion
-      ahora=datetime.now()
-      delta = ahora - fecha
-      #print delta
-      diferencia=delta.total_seconds()
-
-      if((ultima_condicion!=condicion) or (diferencia>=periodo_sin_alarma)):
-         enviar_alertas(reporte,condicion)
+         if((ultima_condicion!=condicion) or (diferencia>=periodo_sin_alarma)):
+            enviar_alertas(reporte,condicion)
 
