@@ -4,30 +4,36 @@
 import time
 import sys
 
-
+import RPi.GPIO as GPIO
 
 
 
 import MySQLdb
-import telepot
-
-from datetime import datetime
 
 
 
 
-time.sleep(14)
+
+
+time.sleep(15)
 
 
 condicion=4
 
-periodo_sin_alarma=1800   #En segundos
 
 
 #print "Temp: "+temp
 #print "Hum: "+hum
 
-
+pin_tmax=6
+pin_tmin=13
+pin_hmax=19
+pin_hmin=26
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(pin_tmax, GPIO.OUT)
+GPIO.setup(pin_tmin, GPIO.OUT)
+GPIO.setup(pin_hmax, GPIO.OUT)
+GPIO.setup(pin_hmin, GPIO.OUT)
 
 
 DB_HOST='localhost'
@@ -53,21 +59,7 @@ def run_query(query=''):
    return data
 
 
-def enviar_alertas(reporte,condicion):
-   #query="INSERT INTO alertas (mensaje,condicion) VALUES ('%s','%s')" %(reporte,condicion)
-   #print query
-   #run_query(query)
-   
-   query="SELECT chat_id from usuarios where habilitado=1"
-   destinatarios=run_query(query)
-   
-   #print len(destinatarios)
-   bot=telepot.Bot('196708475:AAFXMiVQVR1CwyYcs9Hv4Lsa1otAg4gLCM0')
-   
-   for i in range(len(destinatarios)):
-      chat_id=str(destinatarios[i][0])
-      #print chat_id
-      bot.sendMessage(chat_id,reporte)
+
 
 
 while(1):
@@ -93,65 +85,75 @@ while(1):
             reporte="temperatura y humedad por debajo"
             reporte="TEMPERATURA = "+temp+" por debajo del limite configurado de "+str(t_min)+". HUMEDAD = "+hum+" por debajo del limite configurado de "+str(h_min)+"."
             condicion=0
-
+            GPIO.output(pin_tmax, False)
+            GPIO.output(pin_tmin, True)
+            GPIO.output(pin_hmax, False)
+            GPIO.output(pin_hmin, True)
          elif((hum>=h_min) and (hum<=h_max)):
             reporte="temperatura por debajo, humedad ok"
             reporte="TEMPERATURA = "+temp+" por debajo del limite configurado de "+str(t_min)+". HUMEDAD = "+hum+" dentro del limite configurado de "+str(h_min)+" y "+str(h_max)+"."
             condicion=1
-
+            GPIO.output(pin_tmax, False)
+            GPIO.output(pin_tmin, True)
+            GPIO.output(pin_hmax, False)
+            GPIO.output(pin_hmin, False)
          elif(hum>h_max):
             reporte="temperatura por debajo, humedad por encima"
             reporte="TEMPERATURA = "+temp+" por debajo del limite configurado de "+str(t_min)+". HUMEDAD = "+hum+" por encima del limite configurado de "+str(h_max)+"."
             condicion=2
-
+            GPIO.output(pin_tmax, False)
+            GPIO.output(pin_tmin, True)
+            GPIO.output(pin_hmax, True)
+            GPIO.output(pin_hmin, False)
       elif((temp>=t_min) and (temp<=t_max)):
          if(hum<h_min):
             reporte="temperatura ok, humedad por debajo"
             reporte="TEMPERATURA = "+temp+" dentro del limite configurado de "+str(t_min)+" y "+str(t_max)+". HUMEDAD = "+hum+" por debajo del limite configurado de "+str(h_min)+"."
             condicion=3
-
+            GPIO.output(pin_tmax, False)
+            GPIO.output(pin_tmin, False)
+            GPIO.output(pin_hmax, False)
+            GPIO.output(pin_hmin, True)
          elif((hum>=h_min) and (hum<=h_max)):
             reporte="temperatura ok, humedad ok"
             reporte="TEMPERATURA = "+temp+" dentro del limite configurado de "+str(t_min)+" y "+str(t_max)+". HUMEDAD = "+hum+" dentro del limite configurado de "+str(h_min)+" y "+str(h_max)+"."
             condicion=4
-
+            GPIO.output(pin_tmax, False)
+            GPIO.output(pin_tmin, False)
+            GPIO.output(pin_hmax, False)
+            GPIO.output(pin_hmin, False)
          elif(hum>h_max):
             reporte="temperatura ok, humedad por encima"
             reporte="TEMPERATURA = "+temp+" dentro del limite configurado de "+str(t_min)+" y "+str(t_max)+". HUMEDAD = "+hum+" por encima del limite configurado de "+str(h_max)+"."
             condicion=5
-
+            GPIO.output(pin_tmax, False)
+            GPIO.output(pin_tmin, False)
+            GPIO.output(pin_hmax, True)
+            GPIO.output(pin_hmin, False)
       elif (temp>t_max):
          if(hum<h_min):
             reporte="temperatura por encima, humedad por debajo"
             reporte="TEMPERATURA = "+temp+" por encima del limite configurado de "+str(t_max)+". HUMEDAD = "+hum+" por debajo del limite configurado de "+str(h_min)+"."
             condicion=6
-
+            GPIO.output(pin_tmax, True)
+            GPIO.output(pin_tmin, False)
+            GPIO.output(pin_hmax, False)
+            GPIO.output(pin_hmin, True)
          elif((hum>=h_min) and (hum<=h_max)):
             reporte="temperatura por encima, humedad ok"
             reporte="TEMPERATURA = "+temp+" por encima del limite configurado de "+str(t_max)+". HUMEDAD = "+hum+" dentro del limite configurado de "+str(h_min)+" y "+str(h_max)+"."
             condicion=7
-
+            GPIO.output(pin_tmax, True)
+            GPIO.output(pin_tmin, False)
+            GPIO.output(pin_hmax, False)
+            GPIO.output(pin_hmin, False)
          elif(hum>h_max):
             reporte="temperatura por encima, humedad por encima"
             reporte="TEMPERATURA = "+temp+" por encima del limite configurado de "+str(t_max)+". HUMEDAD = "+hum+" por encima del limite configurado de "+str(h_max)+"."
             condicion=8
+            GPIO.output(pin_tmax, True)
+            GPIO.output(pin_tmin, False)
+            GPIO.output(pin_hmax, True)
+            GPIO.output(pin_hmin, False)
 
-      if(condicion!=4):
-         query="SELECT MAX(id) FROM alertas WHERE 1"
-         n=run_query(query)
-         n=n[0][0]
-
-         query="SELECT cuando,condicion FROM alertas WHERE id="+str(n)
-         resultado=run_query(query)
-         fecha=resultado[0][0]
-         ultima_condicion=resultado[0][1]
-         #print fecha
-         #print ultima_condicion
-         ahora=datetime.now()
-         delta = ahora - fecha
-         #print delta
-         diferencia=delta.total_seconds()
-
-         if((ultima_condicion!=condicion) or (diferencia>=periodo_sin_alarma)):
-            enviar_alertas(reporte,condicion)
-
+      

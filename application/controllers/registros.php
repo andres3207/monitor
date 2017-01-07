@@ -1,5 +1,5 @@
 <?php
-class inicio extends CI_Controller {
+class registros extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
@@ -96,7 +96,7 @@ exit();
 
 		$data['layout_navigation']=$this->load->view('layout_navigation',NULL,TRUE);
 
-		$data['layout_body']=$this->load->view('inicio',array("datos"=>$datos),TRUE);
+		$data['layout_body']=$this->load->view('registros',array("datos"=>$datos),TRUE);
 
 		$this->load->view('layout_sin_sidebar',array("data"=>$data),FALSE);
 	//exit();

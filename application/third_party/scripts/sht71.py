@@ -17,13 +17,14 @@ while True:
 
 	temp="{0:0.1f}".format(temp)
 	hum="{0:0.1f}".format(hum)
-
-	f=open("/var/www/web/monitor/application/third_party/scripts/temp2","w")
-	f.write(temp)
-	f.close()
-	f2=open("/var/www/web/monitor/application/third_party/scripts/hum2","w")
-	f2.write(hum)
-	f2.close()
+	if ((temp!="") and (hum!="")):
+	#if hum is not None and temp is not None:
+		f=open("/var/www/web/monitor/application/third_party/scripts/temp2","w")
+		f.write(temp)
+		f.close()
+		f2=open("/var/www/web/monitor/application/third_party/scripts/hum2","w")
+		f2.write(hum)
+		f2.close()
 	#print ("Temperature: {} Humidity: {}".format(temp, hum))
 
 

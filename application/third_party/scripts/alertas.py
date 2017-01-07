@@ -9,14 +9,14 @@ import sys
 
 
 import MySQLdb
-import telepot
+
 
 from datetime import datetime
 
 
 
 
-time.sleep(14)
+time.sleep(16)
 
 
 condicion=4
@@ -54,20 +54,10 @@ def run_query(query=''):
 
 
 def enviar_alertas(reporte,condicion):
-   #query="INSERT INTO alertas (mensaje,condicion) VALUES ('%s','%s')" %(reporte,condicion)
+   query="INSERT INTO alertas (mensaje,condicion) VALUES ('%s','%s')" %(reporte,condicion)
    #print query
-   #run_query(query)
+   run_query(query)
    
-   query="SELECT chat_id from usuarios where habilitado=1"
-   destinatarios=run_query(query)
-   
-   #print len(destinatarios)
-   bot=telepot.Bot('196708475:AAFXMiVQVR1CwyYcs9Hv4Lsa1otAg4gLCM0')
-   
-   for i in range(len(destinatarios)):
-      chat_id=str(destinatarios[i][0])
-      #print chat_id
-      bot.sendMessage(chat_id,reporte)
 
 
 while(1):
@@ -135,6 +125,7 @@ while(1):
             reporte="temperatura por encima, humedad por encima"
             reporte="TEMPERATURA = "+temp+" por encima del limite configurado de "+str(t_max)+". HUMEDAD = "+hum+" por encima del limite configurado de "+str(h_max)+"."
             condicion=8
+
 
       if(condicion!=4):
          query="SELECT MAX(id) FROM alertas WHERE 1"

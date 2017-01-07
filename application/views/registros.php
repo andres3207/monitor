@@ -25,7 +25,7 @@ $cant_reg=count($datos["datos"]);
 <div class="container">
 <div class="form-horizontal">
 <h2>Datos:</h2>
-<form action='inicio' method="POST">
+<form action='registros' method="POST">
 <h3>Filtrar por fecha</h3>
 <div class="form-group">
 <label class='col-md-2 text-left'><p>Desde:<span>aaaa-mm-dd</span></p></label>
