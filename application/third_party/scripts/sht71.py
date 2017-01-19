@@ -17,6 +17,8 @@ while True:
 
 	temp="{0:0.1f}".format(temp)
 	hum="{0:0.1f}".format(hum)
+	print "Temperatura: "+temp
+	print "Humedad: "+hum
 	if ((temp!="") and (hum!="")):
 	#if hum is not None and temp is not None:
 		f=open("/var/www/web/monitor/application/third_party/scripts/temp2","w")

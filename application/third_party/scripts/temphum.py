@@ -26,16 +26,18 @@ def run_query(query=''):
 
    return data
 
+temp=""
+hum=""
 
-
-file = open('/var/www/web/monitor/application/third_party/scripts/temp2', 'r')
-file2 = open('/var/www/web/monitor/application/third_party/scripts/hum2', 'r')
-temp = file.read()
-hum = file2.read()
-file.close()
-file2.close()
-#temp=random.randrange(100)
-#hum=random.randrange(100)
+while(((temp="") or (hum="")))
+   file = open('/var/www/web/monitor/application/third_party/scripts/temp2', 'r')
+   file2 = open('/var/www/web/monitor/application/third_party/scripts/hum2', 'r')
+   temp = file.read()
+   hum = file2.read()
+   file.close()
+   file2.close()
+   #temp=random.randrange(100)
+   #hum=random.randrange(100)
 
 query="INSERT INTO datos (temperatura, humedad) VALUES ('%s','%s')" %(temp,hum)
 #print query
