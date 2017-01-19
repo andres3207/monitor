@@ -27,13 +27,5 @@ while True:
 		f2=open("/var/www/web/monitor/application/third_party/scripts/hum2","w")
 		f2.write(hum)
 		f2.close()
-	#print ("Temperature: {} Humidity: {}".format(temp, hum))
-
-
-#SHT1x = sht1x(dataPin, clkPin, Sht1x.GPIO_BOARD)
-
-#temperature=SHT1x.read_temperature_C()
-
-#humedity = SHT1x.read_humidity()
 
 

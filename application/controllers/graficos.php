@@ -26,8 +26,7 @@ class graficos extends CI_Controller {
    	echo $hasta;*/
    	//exit();
    	//$datos["datos"]=$this->data_model->Datos();
-   	$datos["datos"]=$this->data_model->DatosFiltrados($desde,$hasta);
-   	$datos["limites"]=$this->data_model->CargarLimites();
+   	$datos["datos"]=$this->data_model->DatosFiltrados2($desde,$hasta);
    	//print_r($datos);exit();
 
     $data['section_title']='Sistema de Monitoreo';

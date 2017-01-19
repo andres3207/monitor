@@ -29,7 +29,7 @@ def run_query(query=''):
 temp=""
 hum=""
 
-while(((temp="") or (hum="")))
+while(((temp=="") or (hum==""))):
    file = open('/var/www/web/monitor/application/third_party/scripts/temp2', 'r')
    file2 = open('/var/www/web/monitor/application/third_party/scripts/hum2', 'r')
    temp = file.read()

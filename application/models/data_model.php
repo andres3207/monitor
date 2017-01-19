@@ -3,20 +3,27 @@
  {
 
  	function Datos(){
- 		$consulta="SELECT * From datos WHERE 1";
+ 		$consulta="SELECT * From datos WHERE 1 order by cuando desc";
  		$query = $this->db->query($consulta);
  		return $query->result_array();
  	}
 
  	function DatosFiltrados($desde,$hasta){
- 		$consulta="SELECT * From datos WHERE (date(cuando)>='".$desde."' and date(cuando) <= '".$hasta."')";
+ 		$consulta="SELECT * From datos WHERE (date(cuando)>='".$desde."' and date(cuando) <= '".$hasta."') order by cuando desc";
+ 		//echo $consulta;
+ 		//exit();
+ 		$query = $this->db->query($consulta);
+ 		return $query->result_array();
+ 	}
+ 	function DatosFiltrados2($desde,$hasta){
+ 		$consulta="SELECT * From datos WHERE (date(cuando)>='".$desde."' and date(cuando) <= '".$hasta."') order by cuando asc";
  		//echo $consulta;
  		//exit();
  		$query = $this->db->query($consulta);
  		return $query->result_array();
  	}
  	function Alertas(){
- 		$consulta="SELECT * from alertas WHERE 1";
+ 		$consulta="SELECT * from alertas WHERE 1 order by cuando desc";
  		$query = $this->db->query($consulta);
  		return $query->result_array();
  	}
