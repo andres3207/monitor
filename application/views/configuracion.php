@@ -48,7 +48,7 @@ jQuery(document).ready(function() {
 <div class="col-md-1"><p><input type='number' class="form-control" id="h_max" name="h_max" value=<?php echo "'".$datos["limites"]['h_max']."'"; ?>></input></p></div>
 </div>
 
-<p><input type="submit" class="btn btn-success" value="Guardar"></p>
+<p><input type="submit" class="btn btn-success" value="Guardar cambios"></p>
 </div>
 </div>
 
@@ -56,3 +56,44 @@ jQuery(document).ready(function() {
 <?php echo form_close(); ?>
 
 
+<?php echo form_open('configuracion/borrar_registros/',array('id' => 'registro'));?>
+
+<?php echo validation_errors(); ?>
+
+<?php echo form_fieldset(''); ?>
+
+<div class="container">
+<h2>Borrar registros datos de humedad y temperatura:</h2>
+	<div class="form-horizontal">
+		<div class="form-group">
+		<div class='col-md-2'><p><input type="submit" class="btn btn-danger" name="btn_borrar_registros" value="Borrar Datos"></p></div>
+			
+		</div>
+	</div>
+</div>
+
+<?php echo form_fieldset_close(); ?>
+<?php echo form_close(); ?>
+
+<?php echo form_fieldset_close(); ?>
+<?php echo form_close(); ?>
+
+
+<?php echo form_open('configuracion/borrar_alertas/',array('id' => 'registro'));?>
+
+<?php echo validation_errors(); ?>
+
+<?php echo form_fieldset(''); ?>
+
+<div class="container">
+<h2>Borrar registros de alertas emitidas:</h2>
+	<div class="form-horizontal">
+		<div class="form-group">
+		<div class='col-md-2'><p><input type="submit" class="btn btn-danger" name="btn_borrar_alertas" value="Borrar Alertas"></p></div>
+			
+		</div>
+	</div>
+</div>
+
+<?php echo form_fieldset_close(); ?>
+<?php echo form_close(); ?>

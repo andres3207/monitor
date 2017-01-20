@@ -3,13 +3,13 @@
  {
 
  	function Datos(){
- 		$consulta="SELECT * From datos WHERE 1 order by cuando desc";
+ 		$consulta="SELECT * From datos WHERE ocultar=0 order by cuando desc";
  		$query = $this->db->query($consulta);
  		return $query->result_array();
  	}
 
  	function DatosFiltrados($desde,$hasta){
- 		$consulta="SELECT * From datos WHERE (date(cuando)>='".$desde."' and date(cuando) <= '".$hasta."') order by cuando desc";
+ 		$consulta="SELECT * From datos WHERE (date(cuando)>='".$desde."' and date(cuando) <= '".$hasta."' and ocultar=0) order by cuando desc";
  		//echo $consulta;
  		//exit();
  		$query = $this->db->query($consulta);
@@ -23,7 +23,7 @@
  		return $query->result_array();
  	}
  	function Alertas(){
- 		$consulta="SELECT * from alertas WHERE 1 order by cuando desc";
+ 		$consulta="SELECT * from alertas WHERE ocultar=0 order by cuando desc";
  		$query = $this->db->query($consulta);
  		return $query->result_array();
  	}
@@ -37,6 +37,15 @@
  		$consulta="SELECT t_min,t_max,h_min,h_max From configuracion WHERE id=1";
  		$query = $this->db->query($consulta);
  		return $query->row_array();
+ 	}
+
+ 	function BorrarRegistros(){
+ 		$consulta="UPDATE datos set ocultar=1 where 1";
+ 		$query = $this->db->query($consulta);
+ 	}
+ 	function BorrarAlertas(){
+ 		$consulta="UPDATE alertas set ocultar=1 where 1";
+ 		$query = $this->db->query($consulta);
  	}
 	
  }

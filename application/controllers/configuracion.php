@@ -29,8 +29,18 @@ class configuracion extends CI_Controller {
     	$h_max=$this->input->post('h_max');
 
     	$this->data_model->ActualizarLimites($t_min,$t_max,$h_min,$h_max);
-    	redirect('/inicio', 'refresh');
+    	redirect('/registros', 'refresh');
 
+    }
+
+    function borrar_registros(){
+      $this->data_model->BorrarRegistros();
+      redirect('/registros', 'refresh');
+    }
+
+    function borrar_alertas(){
+      $this->data_model->BorrarAlertas();
+      redirect('/registros', 'refresh');
     }
 
    

@@ -144,5 +144,7 @@ while(1):
          diferencia=delta.total_seconds()
 
          if((ultima_condicion!=condicion) or (diferencia>=periodo_sin_alarma)):
+            query="INSERT INTO datos (temperatura, humedad) VALUES ('%s','%s')" %(temp,hum)
+            run_query(query)
             enviar_alertas(reporte,condicion)
 

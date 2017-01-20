@@ -11,22 +11,34 @@ class graficos extends CI_Controller {
 
    	
 
-    $startdate = strtotime("Now");
-    $enddate = strtotime("-30 days", $startdate);
+    $ahora = strtotime("Now");
+    $anterior = strtotime("-1 month", $ahora);
 
 
-    $hasta= date("Y-m-d",$startdate);
-    $desde= date("Y-m-d",$enddate);
+    $hasta_actual= date("Y-m-31",$ahora);
+    $desde_actual= date("Y-m-01",$ahora);
 
-    $datos["desde"]=$desde;
-    $datos["hasta"]=$hasta;
+    $datos["desde_actual"]=$desde_actual;
+    $datos["hasta_actual"]=$hasta_actual;
 
-   	/*echo $desde;
+    $hasta_anterior= date("Y-m-31",$anterior);
+    $desde_anterior= date("Y-m-01",$anterior);
+
+    $datos["desde_anterior"]=$desde_anterior;
+    $datos["hasta_anterior"]=$hasta_anterior;
+/*
+   	echo $desde_actual;
    	echo "</br>";
-   	echo $hasta;*/
-   	//exit();
+   	echo $hasta_actual;
+    echo "</br>";
+    echo $desde_anterior;
+    echo "</br>";
+    echo $hasta_anterior;
+    echo "</br>";
+   	exit(); */
    	//$datos["datos"]=$this->data_model->Datos();
-   	$datos["datos"]=$this->data_model->DatosFiltrados2($desde,$hasta);
+   	$datos["datos_actual"]=$this->data_model->DatosFiltrados2($desde_actual,$hasta_actual);
+    $datos["datos_anterior"]=$this->data_model->DatosFiltrados2($desde_anterior,$hasta_anterior);
    	//print_r($datos);exit();
 
     $data['section_title']='Sistema de Monitoreo';
