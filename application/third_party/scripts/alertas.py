@@ -16,12 +16,14 @@ from datetime import datetime
 
 
 
-time.sleep(16)
+time.sleep(14)
 
 
 condicion=4
 
 periodo_sin_alarma=1800   #En segundos
+
+alertar=1
 
 
 #print "Temp: "+temp
@@ -131,20 +133,28 @@ while(1):
          query="SELECT MAX(id) FROM alertas WHERE 1"
          n=run_query(query)
          n=n[0][0]
+         if n==None:
+            if alertar==1:
+               query="INSERT INTO datos (temperatura, humedad) VALUES ('%s','%s')" %(temp,hum)
+               run_query(query)
+               enviar_alertas(reporte,condicion)
+               alertar=0
+         else:
+            query="SELECT cuando,condicion FROM alertas WHERE id="+str(n)
+            print query
+            resultado=run_query(query)
+            print resultado
+            fecha=resultado[0][0]
+            ultima_condicion=resultado[0][1]
+            #print fecha
+            #print ultima_condicion
+            ahora=datetime.now()
+            delta = ahora - fecha
+            #print delta
+            diferencia=delta.total_seconds()
 
-         query="SELECT cuando,condicion FROM alertas WHERE id="+str(n)
-         resultado=run_query(query)
-         fecha=resultado[0][0]
-         ultima_condicion=resultado[0][1]
-         #print fecha
-         #print ultima_condicion
-         ahora=datetime.now()
-         delta = ahora - fecha
-         #print delta
-         diferencia=delta.total_seconds()
-
-         if((ultima_condicion!=condicion) or (diferencia>=periodo_sin_alarma)):
-            query="INSERT INTO datos (temperatura, humedad) VALUES ('%s','%s')" %(temp,hum)
-            run_query(query)
-            enviar_alertas(reporte,condicion)
+            if((ultima_condicion!=condicion) or (diferencia>=periodo_sin_alarma)):
+               query="INSERT INTO datos (temperatura, humedad) VALUES ('%s','%s')" %(temp,hum)
+               run_query(query)
+               enviar_alertas(reporte,condicion)
 

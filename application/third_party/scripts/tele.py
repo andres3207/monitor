@@ -58,11 +58,14 @@ def handle(msg):
          query="SELECT max(id) FROM datos"
          n=run_query(query)
          n=n[0][0]
+         #print n
          query="SELECT * FROM datos where id='%s'"%n
          todos=run_query(query)
+         #print todos
          temp=todos[0][1]
          hum=todos[0][2]
-         fecha=todos[0][3]
+         fecha=todos[0][4]
+         #print fecha
          #formato="a las %H:%M:%S del dia %d/%m/%Y"
          formato="%d/%m/%Y %H:%M:%S"
          fecha=fecha.strftime(formato)

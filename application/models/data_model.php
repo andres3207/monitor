@@ -40,11 +40,11 @@
  	}
 
  	function BorrarRegistros(){
- 		$consulta="UPDATE datos set ocultar=1 where 1";
+ 		$consulta="UPDATE datos set ocultar=1, cuando=cuando where 1";
  		$query = $this->db->query($consulta);
  	}
  	function BorrarAlertas(){
- 		$consulta="UPDATE alertas set ocultar=1 where 1";
+ 		$consulta="UPDATE alertas set ocultar=1, cuando=cuando where 1";
  		$query = $this->db->query($consulta);
  	}
 	
