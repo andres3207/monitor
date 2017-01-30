@@ -97,3 +97,25 @@ jQuery(document).ready(function() {
 
 <?php echo form_fieldset_close(); ?>
 <?php echo form_close(); ?>
+
+<?php echo form_open('configuracion/agendar/',array('id' => 'registro'));?>
+
+<?php echo validation_errors(); ?>
+
+<?php echo form_fieldset(''); ?>
+
+<div class="container">
+<h2>Suscribirse por e-mail para recibir alertas:</h2>
+	<div class="form-horizontal">
+		<div class="form-group">
+		<label class='col-md-3 pull-left'><p>Ingrese su email</p></label>
+		<div class="col-md-7"><p><input type="email" class="form-control" id="email" name="email" required></p></div>
+		<div class='col-md-2'><p><input type="submit" class="btn btn-success" name="btn_agregar" value="Agregar Correo"></p></div>
+			
+		</div>
+	</div>
+</div>
+
+<?php echo form_fieldset_close(); ?>
+<?php echo form_close(); ?>
+

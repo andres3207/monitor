@@ -130,7 +130,7 @@ while(1):
 
 
       if(condicion!=4):
-         query="SELECT MAX(id) FROM alertas WHERE 1"
+         query="SELECT MAX(id) FROM alertas WHERE ocultar=0"
          n=run_query(query)
          n=n[0][0]
          if n==None:
@@ -141,9 +141,9 @@ while(1):
                alertar=0
          else:
             query="SELECT cuando,condicion FROM alertas WHERE id="+str(n)
-            print query
+            #print query
             resultado=run_query(query)
-            print resultado
+            #print resultado
             fecha=resultado[0][0]
             ultima_condicion=resultado[0][1]
             #print fecha

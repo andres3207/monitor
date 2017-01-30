@@ -7,28 +7,33 @@ import sys
 
 
 
-
+import smtplib
+from email.MIMEText import MIMEText 
 import MySQLdb
-import telepot
+
 
 from datetime import datetime
 
 
 
 
-time.sleep(16)
+time.sleep(15)
 
 
 condicion=4
 
 periodo_sin_alarma=1800   #En segundos
 
-enviar=1
+alertar=1
 
 
 #print "Temp: "+temp
 #print "Hum: "+hum
 
+# Datos
+username = 'monitor.temp.hum@gmail.com'
+password = 'andres00'
+ 
 
 
 
@@ -55,21 +60,32 @@ def run_query(query=''):
    return data
 
 
-def enviar_alertas(reporte,condicion):
-   #query="INSERT INTO alertas (mensaje,condicion) VALUES ('%s','%s')" %(reporte,condicion)
-   #print query
-   #run_query(query)
+def enviar_alertas(reporte):
+   fromaddr = 'monitor.temp.hum@gmail.com'
+   subject="Alerta de Monitor de Humedad y Temperatura"
    
-   query="SELECT chat_id from usuarios where habilitado=1"
-   destinatarios=run_query(query)
    
-   #print len(destinatarios)
-   bot=telepot.Bot('196708475:AAFXMiVQVR1CwyYcs9Hv4Lsa1otAg4gLCM0')
+   query="SELECT COUNT(id) FROM correos where habilitado=1"
+   n=run_query(query)
+   n=n[0][0]
+   if(n!=0):
+      query="SELECT email FROM correos where habilitado=1"
+      emails=run_query(query)
+      for correo in emails:
+         correo=correo[0]
+         toaddrs  = str(correo)
+         msg = MIMEText(reporte)
+         msg["From"]=fromaddr
+         msg["Subject"]=subject
+         msg["To"]=toaddrs
+         server = smtplib.SMTP('smtp.gmail.com:587')
+         server.starttls()
+         server.login(username,password)
+         server.sendmail(fromaddr, toaddrs, msg.as_string())
+         server.quit()
+
+
    
-   for i in range(len(destinatarios)):
-      chat_id=str(destinatarios[i][0])
-      #print chat_id
-      bot.sendMessage(chat_id,reporte)
 
 
 while(1):
@@ -138,17 +154,22 @@ while(1):
             reporte="TEMPERATURA = "+temp+" por encima del limite configurado de "+str(t_max)+". HUMEDAD = "+hum+" por encima del limite configurado de "+str(h_max)+"."
             condicion=8
 
+
       if(condicion!=4):
          query="SELECT MAX(id) FROM alertas WHERE ocultar=0"
          n=run_query(query)
          n=n[0][0]
          if n==None:
-            if enviar==1:
+            if alertar==1:
+               query="INSERT INTO datos (temperatura, humedad) VALUES ('%s','%s')" %(temp,hum)
+               run_query(query)
                enviar_alertas(reporte,condicion)
-               enviar=0
+               alertar=0
          else:
             query="SELECT cuando,condicion FROM alertas WHERE id="+str(n)
+            #print query
             resultado=run_query(query)
+            #print resultado
             fecha=resultado[0][0]
             ultima_condicion=resultado[0][1]
             #print fecha
@@ -159,5 +180,7 @@ while(1):
             diferencia=delta.total_seconds()
 
             if((ultima_condicion!=condicion) or (diferencia>=periodo_sin_alarma)):
-               enviar_alertas(reporte,condicion)
+               query="INSERT INTO datos (temperatura, humedad) VALUES ('%s','%s')" %(temp,hum)
+               run_query(query)
+               enviar_alertas(reporte)
 

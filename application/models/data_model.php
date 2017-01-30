@@ -47,6 +47,15 @@
  		$consulta="UPDATE alertas set ocultar=1, cuando=cuando where 1";
  		$query = $this->db->query($consulta);
  	}
+ 	function AgregarCorreo($email){
+ 		$consulta="INSERT INTO correos (email,habilitado) values ('".$email."',1)";
+ 		$query = $this->db->query($consulta);
+ 	}
+ 	function CheckCorreo($email){
+ 		$consulta="SELECT COUNT(id) from correos where email='".$email."'";
+ 		$query = $this->db->query($consulta);
+ 		return array_values($query->row_array())[0];
+ 	}
 	
  }
  ?>

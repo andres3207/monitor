@@ -43,6 +43,15 @@ class configuracion extends CI_Controller {
       redirect('/registros', 'refresh');
     }
 
+    function agendar(){
+      $email=$this->input->post("email");
+      $n=$this->data_model->CheckCorreo($email);
+      if($n==0){
+        $this->data_model->AgregarCorreo($email);
+      }
+      redirect('/registros', 'refresh');
+    }
+
    
 
     }
