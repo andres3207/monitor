@@ -17,12 +17,14 @@
   <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
   <script src="<?php echo base_url();?>js/bootstrap.min.js" ></script>
   <!--<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+
+<!--<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"> -->
 </head>
 <body>
-
+<div class="contenedor">
 <!--begin:nave_page-->
 <header>
-   <nav style="background:#ffffff ;"> 
+   <nav style="background:#F3F3F3 ;"> 
     <!--   <nav style="
   background: red; 
   background: -webkit-linear-gradient(blue,blue,red); 
@@ -37,8 +39,8 @@
            
 <img class="img-responsive" src="<?php echo base_url();?>img/header.jpg" width="1200" height="10"></div>--> 
 
-        </div>
-        <div id="navi" class="container_16" style="width: 1200px; margin: 0 auto;"> 
+   
+        <div id="navi" class="container_16" style="width: 80%; margin: 0 auto !important; min-width: 1200px !important;"> 
         <?php //echo $layout_navigation;
 echo $data['layout_navigation'] ;        ?>
         
@@ -59,7 +61,7 @@ echo $data['layout_navigation'] ;        ?>
 <div id='company-support-portal'>
 <div class='wrapper'>
 <!--begin:body-->
-<div id="support-main" class="columnas2" style="width:1200px">
+<div id="support-main" class="columnas2">
 	<!--begin:content-->
   	<div class='support-body' style="padding:10px">
     
@@ -72,7 +74,7 @@ echo $data['layout_navigation'] ;        ?>
     <!--begin:footer  delete-api-button.png
 
 -->
-<div id='footer' style="height:170px; width:1200px;">
+<div id='footer' style="height:170px; width:100%;">
     <h5 style='margin-top: 75px;padding:20px;'>	TECNOCADA  
 	Av. Brown 2650, Olavarria. Buenos Aires. Argentina. <br />
 
@@ -86,6 +88,6 @@ Consultas: Tel: (02284) 15652604 - TECNOCADA@hotmail.com
 </div>
 </div>
 
-
+</div>
 </body>
 </html>

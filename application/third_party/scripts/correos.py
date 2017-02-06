@@ -16,8 +16,9 @@ from datetime import datetime
 
 
 
-
+print("EMPEZANDO")
 time.sleep(15)
+print("EN LINEA")
 
 
 condicion=4

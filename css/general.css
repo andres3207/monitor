@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-  .2columnas,columnas2{width:700px !important;}
+  .2columnas,columnas2{width:100% !important;}
   .1columna,columnas1{width:970px !important}
   .sidebarsi{display:block;}
   .sidebarno{display:none;}
@@ -49,7 +49,8 @@ a img { border: 0; }
   /* Portal Wrappers */
   .wrapper {
   margin: 0 auto;
-  width: 1200px;
+  width: 80%;
+  min-width: 1200px !important;
   }  
   #company-support-portal {
   padding: 0;
@@ -163,6 +164,7 @@ a img { border: 0; }
   }
   
   #support-main .support-body {
+  width: 100% !important;
   background: #FFF;
   border: 1px solid #CCC;
   -moz-box-shadow: 0 3px 4px #CCC;
@@ -1208,11 +1210,6 @@ a img { border: 0; }
   top: 5px;
   }
   
- 
- .wrapper {
-  width: 1200px !important;
- }
- 
 
   
   
@@ -2040,6 +2037,9 @@ Clearfix
 * html .clearfix { height: 1%; overflow: visible; }
 *+html .clearfix { min-height: 1%; }
 .clearfix:after{
+  margin: 0 auto;
+  width: 80%;
+  min-width: 1200px !important;
   clear: both;
   content: ".";
   display: block;
@@ -2182,4 +2182,10 @@ th {
     font-family: "SourceSansPro";
     font-style: normal;
     src: local("?"), url("../fuentes/SourceSansPro-Lightit.otf") format("opentype");
+  }
+
+  .contenedor{
+    width: 80% !important;
+    min-width: 1200px !important;
+    margin:0 auto;
   }
