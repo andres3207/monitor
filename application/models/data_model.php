@@ -65,6 +65,18 @@
 		$consulta="UPDATE sensores SET nombre='".$nombre."',habilitado='".$estado."' WHERE id='".$id."'";
 		$query = $this->db->query($consulta);
 	}
+	function NombreCodigo($id_sensor){
+		$consulta="SELECT nombre,mac_sensor FROM sensores WHERE id='".$id_sensor."'";
+		$query = $this->db->query($consulta);
+		$tmp=$query->row_array();
+		#print($tmp["mac_sensor"]);
+		#exit();
+		if($tmp["nombre"]==''){
+			return $tmp["mac_sensor"];
+		}else{
+			return $tmp["nombre"];
+		}
+	}
 	
  }
  ?>

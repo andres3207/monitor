@@ -29,19 +29,19 @@ def run_query(query=''):
 temp=""
 hum=""
 
-while(((temp=="") or (hum==""))):
-   file = open('/var/www/web/monitor/application/third_party/scripts/temp2', 'r')
-   file2 = open('/var/www/web/monitor/application/third_party/scripts/hum2', 'r')
-   temp = file.read()
-   hum = file2.read()
-   file.close()
-   file2.close()
-   #temp=random.randrange(100)
-   #hum=random.randrange(100)
-
-query="INSERT INTO datos (temperatura, humedad) VALUES ('%s','%s')" %(temp,hum)
+query="SELECT * FROM sensores WHERE habilitado=1"
 #print query
-run_query(query)
+datos=run_query(query)
+
+#print datos[0]
+
+for sensor in datos:
+   id_sensor=sensor[0]
+   temp=sensor[3]
+   hum=sensor[4]
+   query="INSERT INTO datos (id_sensor,temperatura, humedad) VALUES ('%s','%s','%s')" %(id_sensor,temp,hum)
+   #print query
+   run_query(query)
 
 
 

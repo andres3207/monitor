@@ -14,7 +14,10 @@ setTimeout('document.location.reload()',10000);
 
 </style>
 
+<?php 
 
+$cant_sensor=count($datos["sensores"]);
+?>
 <div class="container">
 <div class="form-horizontal">
 <!--
@@ -29,8 +32,7 @@ setTimeout('document.location.reload()',10000);
 <div class="col-md-2"><p><input type='text' class="form-control" id="hum" name="hum" readonly value=<?php echo "'".$datos["hum"]." %'"; ?>></input></p></div>
 </div>
 
-<label>SHT71</label> -->
-
+<label>SHT71</label> 
 
 <div class="form-group">
 <label class='col-md-3 text-left'><p>Temperatura Actual:</p></label>
@@ -40,25 +42,33 @@ setTimeout('document.location.reload()',10000);
 <div class="form-group">
 <label class='col-md-3 text-left'><p>Humedad Actual:</p></label>
 <div class="col-md-2"><p><input type='text' class="form-control" id="hum2" name="hum2" readonly value=<?php echo "'".$datos["hum2"]." %'"; ?>></input></p></div>
-
-
-<!--
-<div class="form-group">
-<label class='col-md-3 text-left'><p>Temperatura Heladera 1:</p></label>
-<div class="col-md-2"><p><input type='text' class="form-control" id="temp2" name="temp2" readonly value="6 °C"></input></p></div>
 </div>
-
-<div class="form-group">
-<label class='col-md-3 text-left'><p>Temperatura Heladera 2:</p></label>
-<div class="col-md-2"><p><input type='text' class="form-control" id="hum2" name="hum2" readonly value="5 °C"></input></p></div>
-</div>
-<div class="form-group">
-<label class='col-md-3 text-left'><p>Temperatura Heladera 3:</p></label>
-<div class="col-md-2"><p><input type='text' class="form-control" id="hum2" name="hum2" readonly value="7 °C"></input></p></div>
-
 -->
 
-</div>
+<?php
+
+for ($i=0; $i <$cant_sensor ; $i++) { 
+	if($datos["sensores"][$i]["habilitado"]){
+		if($datos["sensores"][$i]["nombre"]==""){
+			echo "<h2>".$datos["sensores"][$i]["mac_sensor"]."</h2>";
+		}else{
+			echo "<h2>".$datos["sensores"][$i]["nombre"]."</h2>";
+		}
+		echo "<div class='form-group'>";
+		echo "<label class='col-md-3 text-left'><p>Temperatura Actual:</p></label>";
+		echo "<div class='col-md-2'><p><input type='text' class='form-control' id='temp2' name='temp2' readonly value='".$datos["sensores"][$i]["temperatura"]." °C'></input></p></div>";
+		echo "</div>";
+		echo "<div class='form-group'>";
+		echo "<label class='col-md-3 text-left'><p>Humedad Actual:</p></label>";
+		echo "<div class='col-md-2'><p><input type='text' class='form-control' id='hum2' name='hum2' readonly value='".$datos["sensores"][$i]["humedad"]." %'></input></p></div>";
+		echo "</div>";
+		echo "</br>";
+		echo "</br>";
+	}
+}
+?>
+
+
 </div>
 </div>
 

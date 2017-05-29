@@ -24,14 +24,14 @@ class lista_sensores extends CI_Controller {
 
     function guardar(){
       $cant_sensores=$this->input->post('cant_sensores');
-    	 //print($cant_sensores);
        //exit();
       for ($i=0; $i < $cant_sensores ; $i++) { 
         $id=$this->input->post('id-'.$i);
         $nombre=$this->input->post('nombre-'.$i);
         $estado=$this->input->post('estado-'.$i);
+        $this->data_model->ActualizarSensor($id,$nombre,$estado);
       }
-    	$this->data_model->ActualizarSensor($id,$nombre,$estado);
+    	
     	redirect('/lista_sensores', 'refresh');
 
     }
