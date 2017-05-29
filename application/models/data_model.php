@@ -56,6 +56,15 @@
  		$query = $this->db->query($consulta);
  		return array_values($query->row_array())[0];
  	}
+ 	function CargarSensores(){
+		$consulta="SELECT * FROM sensores WHERE 1";
+		$query = $this->db->query($consulta);
+ 		return $query->result_array();
+	}
+	function ActualizarSensor($id,$nombre,$estado){
+		$consulta="UPDATE sensores SET nombre='".$nombre."',habilitado='".$estado."' WHERE id='".$id."'";
+		$query = $this->db->query($consulta);
+	}
 	
  }
  ?>

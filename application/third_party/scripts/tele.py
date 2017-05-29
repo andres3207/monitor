@@ -8,6 +8,8 @@ import netifaces
 
 
 
+time.sleep(12)
+print "TELE ONLINE"
 
 def run_query(query=''):
    datos = [DB_HOST, DB_USER, DB_PASS, DB_NAME]

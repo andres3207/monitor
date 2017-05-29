@@ -14,6 +14,7 @@
     <li><a href="<?=base_url()?>tiemporeal" title="Datos en tiempo real" ><h6>Datos en tiempo real</h6></a></li>
 	<li><a href="<?=base_url()?>registros" title="Registros" ><h6>Registros</h6></a></li>
     <li><a href="<?=base_url()?>configuracion" title="Configuracion" ><h6>Configuracion</h6></a></li>
+    <li><a href="<?=base_url()?>lista_sensores" title="Lista de Sensores" ><h6>Lista de Sensores</h6></a></li>
     <li><a href="<?=base_url()?>alarmas" title="Alarmas emitidas" ><h6>Alarmas emitidas</h6></a></li>
     <li><a href="<?=base_url()?>graficos" title="Graficos" ><h6>Graficos</h6></a></li>
 
