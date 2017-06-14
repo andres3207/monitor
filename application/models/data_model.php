@@ -3,80 +3,89 @@
  {
 
  	function Datos(){
- 		$consulta="SELECT * From datos WHERE ocultar=0 order by cuando desc";
- 		$query = $this->db->query($consulta);
- 		return $query->result_array();
+ 		$consulta="datos()";
+ 		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
  	}
 
  	function DatosFiltrados($desde,$hasta){
- 		$consulta="SELECT * From datos WHERE (date(cuando)>='".$desde."' and date(cuando) <= '".$hasta."' and ocultar=0) order by cuando desc";
- 		//echo $consulta;
- 		//exit();
- 		$query = $this->db->query($consulta);
- 		return $query->result_array();
+ 		$consulta="datos_filtrados('".$desde."','".$hasta."')";
+ 		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
  	}
  	function DatosFiltrados2($desde,$hasta){
- 		$consulta="SELECT * From datos WHERE (date(cuando)>='".$desde."' and date(cuando) <= '".$hasta."') order by cuando asc";
- 		//echo $consulta;
- 		//exit();
- 		$query = $this->db->query($consulta);
- 		return $query->result_array();
+ 		$consulta="datos_filtrados_2('".$desde."','".$hasta."')";
+ 		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
  	}
  	function Alertas(){
- 		$consulta="SELECT * from alertas WHERE ocultar=0 order by cuando desc";
- 		$query = $this->db->query($consulta);
- 		return $query->result_array();
+ 		$consulta="alertas()";
+ 		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
  	}
 
  	function ActualizarLimites($t_min,$t_max,$h_min,$h_max){
- 		$consulta="UPDATE configuracion set t_min='".$t_min."',t_max='".$t_max."',h_min='".$h_min."',h_max='".$h_max."' WHERE id=1";
- 		$query = $this->db->query($consulta);
- 		//return $query->result_array();
+ 		$consulta="actualizar_limites('".$t_min."','".$t_max."','".$h_min."','".$h_max."')";
+ 		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
  	}
  	function CargarLimites(){
- 		$consulta="SELECT t_min,t_max,h_min,h_max From configuracion WHERE id=1";
- 		$query = $this->db->query($consulta);
- 		return $query->row_array();
+ 		$consulta="cargar_limites()";
+ 		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->row_array();
  	}
 
  	function BorrarRegistros(){
- 		$consulta="UPDATE datos set ocultar=1, cuando=cuando where 1";
- 		$query = $this->db->query($consulta);
+ 		$consulta="borrar_registros()";
+ 		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
  	}
  	function BorrarAlertas(){
- 		$consulta="UPDATE alertas set ocultar=1, cuando=cuando where 1";
- 		$query = $this->db->query($consulta);
+ 		$consulta="borrar_alertas()";
+ 		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
  	}
  	function AgregarCorreo($email){
- 		$consulta="INSERT INTO correos (email,habilitado) values ('".$email."',1)";
- 		$query = $this->db->query($consulta);
- 	}
- 	function CheckCorreo($email){
- 		$consulta="SELECT COUNT(id) from correos where email='".$email."'";
- 		$query = $this->db->query($consulta);
- 		return array_values($query->row_array())[0];
+ 		$consulta="Iagregar_correo('".$email."')";
+ 		$query = $this->db->query("select ".$consulta);
+ 		return $query->result_array();
  	}
  	function CargarSensores(){
-		$consulta="SELECT * FROM sensores WHERE 1";
-		$query = $this->db->query($consulta);
- 		return $query->result_array();
+		$consulta="cargar_sensores()";
+		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
 	}
 	function ActualizarSensor($id,$nombre,$estado){
-		$consulta="UPDATE sensores SET nombre='".$nombre."',habilitado='".$estado."' WHERE id='".$id."'";
-		$query = $this->db->query($consulta);
+		$consulta="actualizar_sensor(".$id.",'".$nombre."','".$estado."')";
+		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
 	}
 	function NombreCodigo($id_sensor){
-		$consulta="SELECT nombre,mac_sensor FROM sensores WHERE id='".$id_sensor."'";
-		$query = $this->db->query($consulta);
-		$tmp=$query->row_array();
-		#print($tmp["mac_sensor"]);
-		#exit();
-		if($tmp["nombre"]==''){
-			return $tmp["mac_sensor"];
-		}else{
-			return $tmp["nombre"];
-		}
+		$consulta="nombre_codigo('".$id_sensor."')";
+		$query = $this->db->query("select ".$consulta);
+		return array_values($query->row_array())[0];
 	}
-	
+	function GuardarSensor($temp,$hum,$mac){
+		$consulta="guardar_sensor('".$temp."','".$hum."','".$mac."')";
+		$query = $this->db->query("call ".$consulta);
+		$query->next_result();
+		return $query->result_array();
+	}
+	function DatosFiltrados3($id_sensor,$desde,$hasta){
+		$consulta="datos_filtrados_3(".$id_sensor.",'".$desde."','".$hasta."')";
+		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
+	}
  }
  ?>
