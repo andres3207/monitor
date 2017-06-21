@@ -30,7 +30,11 @@ class sensor extends CI_Controller {
 	//echo("HOLA");
 	//exit();
 
-    	$this->data_model->GuardarSensor($temp,$hum,$mac);
+      if (($temp!="") and ($hum!="") and ($mac!="")) {
+        $this->data_model->GuardarSensor($temp,$hum,$mac);
+      }
+
+    	
     	redirect('/sensor', 'refresh');
 
     }
