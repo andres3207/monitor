@@ -32,11 +32,13 @@ var chart;
 			var humedades_act = new Array();
 
 			for (var j = 0; j < cant_reg_act; j++) {
-				fechas_act[j]=$("#fecha_act-"+j).val();
-				temperaturas_act[j]=parseFloat($("#temp_act-"+j).val());
-				humedades_act[j]=parseFloat($("#hum_act-"+j).val());
+				fechas_act[j]=$("#fecha_act-"+i+"-"+j).val();
+				temperaturas_act[j]=parseFloat($("#temp_act-"+i+"-"+j).val());
+				humedades_act[j]=parseFloat($("#hum_act-"+i+"-"+j).val());
 
 			}
+			//console.log(fechas_act);
+			//console.log(humedades_act);
 			var render_temp="graficoTemp_act-"+i
 			var texto=$("#nombre_codigo-"+i).val();
 			chart = new Highcharts.Chart({
@@ -142,12 +144,14 @@ var chart;
 			var temperaturas_ant = new Array();
 			var humedades_ant = new Array();
 
+
 			for (var j = 0; j < cant_reg_ant; j++) {
-				fechas[_antj]=$("#fecha_ant-"+j).val();
-				temperaturas_ant[j]=parseFloat($("#temp_ant-"+j).val());
-				humedades_ant[j]=parseFloat($("#hum_ant-"+j).val());
+				fechas_ant[j]=$("#fecha_ant-"+i+"-"+j).val();
+				temperaturas_ant[j]=parseFloat($("#temp_ant-"+i+"-"+j).val());
+				humedades_ant[j]=parseFloat($("#hum_ant-"+i+"-"+j).val());
 
 			}
+			//console.log(humedades_ant)
 			var render_temp="graficoTemp_ant-"+i
 			var texto=$("#nombre_codigo-"+i).val();
 			chart = new Highcharts.Chart({
@@ -306,20 +310,20 @@ for ($i=0; $i <$datos["cant_sensores"] ; $i++) {
 	echo "<input type='text' id='nombre_codigo-".$i."' name='nombre_codigo-".$i."' value='".$datos["nombre_codigo"][$i]."' hidden >";
 	echo "<input type='text' id='cant_reg_act-".$i."' name='cant_reg_act-".$i."' value='".$cant_reg_act."' hidden >";
 	for ($j=0; $j < $cant_reg_act ; $j++) { 
-		echo "<input type='text' id='id_act-".$j."' name='id_act-".$j."' value='".$datos["datos_actual"][$i][$j]["id"]."' hidden >";
-		echo "<input type='text' id='temp_act-".$j."' name='temp_act-".$j."' value='".$datos["datos_actual"][$i][$j]["temperatura"]."' hidden >";
-		echo "<input type='text' id='hum_act-".$j."' name='hum_act-".$j."' value='".$datos["datos_actual"][$i][$j]["humedad"]."' hidden >";
-		echo "<input type='text' id='fecha_act-".$j."' name='fecha_act-".$j."' value='".$datos["datos_actual"][$i][$j]["cuando"]."' hidden >";
+		echo "<input type='text' id='id_act-".$i."-".$j."' name='id_act-".$j."' value='".$datos["datos_actual"][$i][$j]["id"]."' hidden >";
+		echo "<input type='text' id='temp_act-".$i."-".$j."' name='temp_act-".$j."' value='".$datos["datos_actual"][$i][$j]["temperatura"]."' hidden >";
+		echo "<input type='text' id='hum_act-".$i."-".$j."' name='hum_act-".$j."' value='".$datos["datos_actual"][$i][$j]["humedad"]."' hidden >";
+		echo "<input type='text' id='fecha_act-".$i."-".$j."' name='fecha_act-".$j."' value='".$datos["datos_actual"][$i][$j]["cuando"]."' hidden >";
 	}
 
 
 	echo "<input type='text' id='cant_reg_ant-".$i."' name='cant_reg_ant-".$i."' value='".$cant_reg_ant."' hidden >";
 
 	for ($j=0; $j < $cant_reg_ant; $j++) { 
-		echo "<input type='text' id='id_ant-".$j."' name='id_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["id"]."' hidden >";
-		echo "<input type='text' id='temp_ant-".$j."' name='temp_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["temperatura"]."' hidden >";
-		echo "<input type='text' id='hum_ant-".$j."' name='hum_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["humedad"]."' hidden >";
-		echo "<input type='text' id='fecha_ant-".$j."' name='fecha_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["cuando"]."' hidden >";
+		echo "<input type='text' id='id_ant-".$i."-".$j."' name='id_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["id"]."' hidden >";
+		echo "<input type='text' id='temp_ant-".$i."-".$j."' name='temp_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["temperatura"]."' hidden >";
+		echo "<input type='text' id='hum_ant-".$i."-".$j."' name='hum_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["humedad"]."' hidden >";
+		echo "<input type='text' id='fecha_ant-".$i."-".$j."' name='fecha_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["cuando"]."' hidden >";
 	}
 }
 ?>

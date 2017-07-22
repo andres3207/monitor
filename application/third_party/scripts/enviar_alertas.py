@@ -5,7 +5,12 @@ import time
 import sys
 import telepot
 
+import telepot.api
+import urllib3
 
+telepot.api._pools = {
+    'default': urllib3.PoolManager(num_pools=3, maxsize=10, retries=10, timeout=40),
+}
 
 
 import MySQLdb
@@ -19,7 +24,8 @@ from email.MIMEText import MIMEText
 
 
 
-time.sleep(14)
+time.sleep(20)
+print "Iniciado"
 
 
 DB_HOST='localhost'
@@ -53,9 +59,14 @@ def run_query(query=''):
 def enviar_telegrams(mensaje):
    query="select chat_id from usuarios where habilitado=1"
    usuarios=run_query(query)
+   #print usuarios
+   
    for x in usuarios:
-      bot=telepot.Bot('196708475:AAFXMiVQVR1CwyYcs9Hv4Lsa1otAg4gLCM0')
+
+      #bot=telepot.Bot('196708475:AAFXMiVQVR1CwyYcs9Hv4Lsa1otAg4gLCM0')
       bot.sendMessage(str(x[0]),mensaje)
+      print "Telegram enviado a "+str(x[0])
+      #time.sleep(1)
 
 def enviar_correos(mensaje):
    query="select email from correos where habilitado=1"
@@ -78,6 +89,7 @@ def visar_alerta(id_alarma):
    query="update alertas set enviado=1, cuando=cuando where id="+str(id_alarma)
    run_query(query)
 
+bot=telepot.Bot('196708475:AAFXMiVQVR1CwyYcs9Hv4Lsa1otAg4gLCM0')
 while(1):
    query="select id,mensaje,cuando from alertas where enviado=0"
    alertas=run_query(query)
@@ -86,8 +98,21 @@ while(1):
       mensaje=str(x[1])+". "+str(x[2])
       #print id_alarma
       #print mensaje
-      enviar_telegrams(mensaje)
-      enviar_correos(mensaje)
-      visar_alerta(id_alarma)
+      try:
+         enviar_telegrams(mensaje)
+      except:
+         print "EXCEPT de Telegram"
+         enviar_telegrams(mensaje)
+         print "Lo reenvie"
+      try:
+         enviar_correos(mensaje)
+      except:
+         pass
+      try:
+         visar_alerta(id_alarma)
+      except:
+         pass
+      
+      time.sleep(5)
    #print "CHK"
    time.sleep(5)

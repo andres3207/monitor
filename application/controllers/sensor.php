@@ -29,8 +29,10 @@ class sensor extends CI_Controller {
 
 	//echo("HOLA");
 	//exit();
+      $fl_temp=floatval($temp);
+      $fl_hum=floatval($hum);
 
-      if (($temp!="") and ($hum!="") and ($mac!="")) {
+      if (($fl_temp>=-40) and ($fl_temp<=100) and ($fl_hum>=0) and ($fl_hum<=100) and ($mac!="")) {
         $this->data_model->GuardarSensor($temp,$hum,$mac);
       }
 

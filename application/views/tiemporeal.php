@@ -8,7 +8,57 @@
 
 </head>
 <script type="text/javascript">
+$(document).ready(function() {
 setTimeout('document.location.reload()',10000);
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.moveTo(570,702);
+ctx.lineTo(1130,508);
+ctx.stroke();
+
+ctx.moveTo(1130,508);
+ctx.lineTo(1130,142);
+ctx.stroke();
+
+ctx.moveTo(1130,142); //ARREGLAR
+ctx.lineTo(902,10);
+ctx.stroke();
+
+ctx.moveTo(570,702);
+ctx.lineTo(342,570);
+ctx.stroke();
+
+
+ctx.moveTo(342,570);
+ctx.lineTo(342,204);
+ctx.stroke();
+
+ctx.moveTo(342,204);
+ctx.lineTo(902,10);
+ctx.stroke();
+
+ctx.moveTo(570,702);
+ctx.lineTo(570,336);
+ctx.stroke();
+
+ctx.moveTo(570,336);
+ctx.lineTo(342,204);
+ctx.stroke();
+
+ctx.moveTo(570,336);
+ctx.lineTo(1130,142);
+ctx.stroke();
+
+var temp=$("#temp2").val();
+var hum=$("#hum2").val();
+
+ctx.font = "30px Arial";
+ctx.fillText("T: "+temp,850,356);
+ctx.font = "30px Arial";
+ctx.fillText("H: "+hum,850,400);
+
+})
 </script>
 <style type="text/css">
 
@@ -66,9 +116,10 @@ for ($i=0; $i <$cant_sensor ; $i++) {
 		echo "</br>";
 	}
 }
+
 ?>
 
-
+<canvas id="myCanvas" width="1140" height="712" style="border:1px solid #d3d3d3;">
 </div>
 </div>
 

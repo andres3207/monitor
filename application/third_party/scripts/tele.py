@@ -19,7 +19,7 @@ teclado_inline=InlineKeyboardMarkup(inline_keyboard=[
                      [InlineKeyboardButton(text='Guardar cambios', callback_data='guardar')],
                  ])
 
-#time.sleep(12)
+time.sleep(14)
 #print "TELE ONLINE"
 
 def run_query(query=''):
@@ -55,14 +55,14 @@ def on_chat_message(msg):
          if(msg_rec.lower()=="alta "+NUMERO_SERIE):
             query="INSERT into usuarios (chat_id,habilitado) values ('"+str(chat_id)+"',1)"
             resp=run_query(query)
-            bot.sendMessage(chat_id,"CODIGO VALIDO"+chr(10)+chr(13)+"Usuario dado de alta")
+            bot.sendMessage(chat_id,"CODIGO VALIDO"+chr(10)+chr(13)+"Usuario dado de alta",reply_markup=teclado2)
          else:
             bot.sendMessage(chat_id,"CODIGO INVALIDO"+chr(10)+chr(13)+"Vuelva a intentar")
       else:
          if(msg_rec.lower()=="alta "+NUMERO_SERIE):
             query="UPDATE usuarios set habilitado=1 where chat_id="+str(chat_id)
             resp=run_query(query)
-            bot.sendMessage(chat_id,"CODIGO VALIDO"+chr(10)+chr(13)+"Usuario dado de alta")
+            bot.sendMessage(chat_id,"CODIGO VALIDO"+chr(10)+chr(13)+"Usuario dado de alta",reply_markup=teclado2)
          else:
             bot.sendMessage(chat_id,"CODIGO INVALIDO"+chr(10)+chr(13)+"Vuelva a intentar")
    else:      
@@ -211,7 +211,7 @@ def on_chat_message(msg):
                msg=msg+"Desde la red Wifi del equipo: http://"+str(direccion)+"/monitor/"
          bot.sendMessage(chat_id,msg,reply_markup=teclado2)
       else:
-         bot.sendMessage(chat_id,"Comando no reconocido")
+         bot.sendMessage(chat_id,"Comando no reconocido",reply_markup=teclado2)
 
 def on_callback_query(msg):
     query_id, from_id, data = telepot.glance(msg, flavor='callback_query')
