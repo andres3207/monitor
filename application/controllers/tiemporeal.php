@@ -27,6 +27,7 @@ class tiemporeal extends CI_Controller {
     fclose($fp2); */
 
     $datos["sensores"]=$this->data_model->CargarSensores();
+    $datos["umbrales"]=$this->data_model->CargarLimites();
 
    	$data['section_title']='Datos en tiempo real';
 
