@@ -18,256 +18,224 @@
 <script type="text/javascript">
 var chart;
 	$(document).ready(function() {
+		var fechas1 = new Array();
+		var temperaturas1 = new Array();
+		var humedades1 = new Array();
+		var n1=$("#cant_reg1").val();
+
+		var fechas2 = new Array();
+		var temperaturas2 = new Array();
+		var humedades2 = new Array();
+		var n2=$("#cant_reg2").val();
 
 
-		var cant_sensores=$("#cant_sensor").val();
-		//console.log(cant_sensores);
-		for (var i = 0; i < cant_sensores; i++) {
-			var cant_reg_act=$("#cant_reg_act-"+i).val();
-			var cant_reg_ant=$("#cant_reg_ant-"+i).val();
-			//console.log(cant_reg_act);
-			
-			var fechas_act = new Array();
-			var temperaturas_act = new Array();
-			var humedades_act = new Array();
-
-			for (var j = 0; j < cant_reg_act; j++) {
-				fechas_act[j]=$("#fecha_act-"+i+"-"+j).val();
-				temperaturas_act[j]=parseFloat($("#temp_act-"+i+"-"+j).val());
-				humedades_act[j]=parseFloat($("#hum_act-"+i+"-"+j).val());
-
-			}
-			//console.log(fechas_act);
-			//console.log(humedades_act);
-			var render_temp="graficoTemp_act-"+i
-			var texto=$("#nombre_codigo-"+i).val();
-			chart = new Highcharts.Chart({
-			chart: {
-				renderTo: render_temp, 	// Le doy el nombre a la gráfica
-				defaultSeriesType: 'line'	// Pongo que tipo de gráfica es
-			},
-			title: {
-				text: 'Datos de Temperatura'	// Titulo (Opcional)
-			},
-			subtitle: {
-				text: texto		// Subtitulo (Opcional)
-			},
-			// Pongo los datos en el eje de las 'X'
-			xAxis: {
-				categories: fechas_act,
-				// Pongo el título para el eje de las 'X'
-				title: {
-					text: 'Fechas'
-				}
-			},
-			yAxis: {
-				// Pongo el título para el eje de las 'Y'
-				title: {
-					text: 'Temperatura [°C]'
-				}
-			},
-			// Doy formato al la "cajita" que sale al pasar el ratón por encima de la gráfica
-			tooltip: {
-				enabled: true,
-				formatter: function() {
-					return '<b>'+ this.series.name +'</b><br/>'+
-						this.x +': '+ this.y +' '+this.series.name;
-				}
-			},
-			// Doy opciones a la gráfica
-			plotOptions: {
-				line: {
-					dataLabels: {
-						enabled: false
-					},
-					enableMouseTracking: true
-				}
-			},
-			// Doy los datos de la gráfica para dibujarlas
-			series: [{
-		                name: 'Temperatura',
-		                data: temperaturas_act
-		            }],
-		});	
-
-			var render_hum="graficoHum_act-"+i
-
-			chart = new Highcharts.Chart({
-			chart: {
-				renderTo: render_hum, 	// Le doy el nombre a la gráfica
-				defaultSeriesType: 'line'	// Pongo que tipo de gráfica es
-			},
-			title: {
-				text: 'Datos de Humedad'	// Titulo (Opcional)
-			},
-			subtitle: {
-				text: texto		// Subtitulo (Opcional)
-			},
-			// Pongo los datos en el eje de las 'X'
-			xAxis: {
-				categories: fechas_act,
-				// Pongo el título para el eje de las 'X'
-				title: {
-					text: 'Fechas'
-				}
-			},
-			yAxis: {
-				// Pongo el título para el eje de las 'Y'
-				title: {
-					text: 'Humedad [%]'
-				}
-			},
-			// Doy formato al la "cajita" que sale al pasar el ratón por encima de la gráfica
-			tooltip: {
-				enabled: true,
-				formatter: function() {
-					return '<b>'+ this.series.name +'</b><br/>'+
-						this.x +': '+ this.y +' '+this.series.name;
-				}
-			},
-			// Doy opciones a la gráfica
-			plotOptions: {
-				line: {
-					dataLabels: {
-						enabled: false
-					},
-					enableMouseTracking: true
-				}
-			},
-			// Doy los datos de la gráfica para dibujarlas
-			series: [{
-		                name: 'Humedad',
-		                data: humedades_act
-		            }],
-		});
-			var fechas_ant = new Array();
-			var temperaturas_ant = new Array();
-			var humedades_ant = new Array();
-
-
-			for (var j = 0; j < cant_reg_ant; j++) {
-				fechas_ant[j]=$("#fecha_ant-"+i+"-"+j).val();
-				temperaturas_ant[j]=parseFloat($("#temp_ant-"+i+"-"+j).val());
-				humedades_ant[j]=parseFloat($("#hum_ant-"+i+"-"+j).val());
-
-			}
-			//console.log(humedades_ant)
-			var render_temp="graficoTemp_ant-"+i
-			var texto=$("#nombre_codigo-"+i).val();
-			chart = new Highcharts.Chart({
-			chart: {
-				renderTo: render_temp, 	// Le doy el nombre a la gráfica
-				defaultSeriesType: 'line'	// Pongo que tipo de gráfica es
-			},
-			title: {
-				text: 'Datos de Temperatura'	// Titulo (Opcional)
-			},
-			subtitle: {
-				text: texto		// Subtitulo (Opcional)
-			},
-			// Pongo los datos en el eje de las 'X'
-			xAxis: {
-				categories: fechas_ant,
-				// Pongo el título para el eje de las 'X'
-				title: {
-					text: 'Fechas'
-				}
-			},
-			yAxis: {
-				// Pongo el título para el eje de las 'Y'
-				title: {
-					text: 'Temperatura [°C]'
-				}
-			},
-			// Doy formato al la "cajita" que sale al pasar el ratón por encima de la gráfica
-			tooltip: {
-				enabled: true,
-				formatter: function() {
-					return '<b>'+ this.series.name +'</b><br/>'+
-						this.x +': '+ this.y +' '+this.series.name;
-				}
-			},
-			// Doy opciones a la gráfica
-			plotOptions: {
-				line: {
-					dataLabels: {
-						enabled: false
-					},
-					enableMouseTracking: true
-				}
-			},
-			// Doy los datos de la gráfica para dibujarlas
-			series: [{
-		                name: 'Temperatura',
-		                data: temperaturas_ant
-		            }],
-		});	
-
-			var render_hum="graficoHum_ant-"+i
-
-			chart = new Highcharts.Chart({
-			chart: {
-				renderTo: render_hum, 	// Le doy el nombre a la gráfica
-				defaultSeriesType: 'line'	// Pongo que tipo de gráfica es
-			},
-			title: {
-				text: 'Datos de Humedad'	// Titulo (Opcional)
-			},
-			subtitle: {
-				text: texto		// Subtitulo (Opcional)
-			},
-			// Pongo los datos en el eje de las 'X'
-			xAxis: {
-				categories: fechas_ant,
-				// Pongo el título para el eje de las 'X'
-				title: {
-					text: 'Fechas'
-				}
-			},
-			yAxis: {
-				// Pongo el título para el eje de las 'Y'
-				title: {
-					text: 'Humedad [%]'
-				}
-			},
-			// Doy formato al la "cajita" que sale al pasar el ratón por encima de la gráfica
-			tooltip: {
-				enabled: true,
-				formatter: function() {
-					return '<b>'+ this.series.name +'</b><br/>'+
-						this.x +': '+ this.y +' '+this.series.name;
-				}
-			},
-			// Doy opciones a la gráfica
-			plotOptions: {
-				line: {
-					dataLabels: {
-						enabled: false
-					},
-					enableMouseTracking: true
-				}
-			},
-			// Doy los datos de la gráfica para dibujarlas
-			series: [{
-		                name: 'Humedad',
-		                data: humedades_ant
-		            }],
-		});
-
-
+		//console.log(n);
+		for (var i = 0; i < n1 ; i++) {
+			fechas1[i]=$("#fecha1-"+i).val();
+			temperaturas1[i]=parseFloat($("#temp1-"+i).val());
+			humedades1[i]=parseFloat($("#hum1-"+i).val());
 		}
 
+		for (var i = 0; i < n2 ; i++) {
+			fechas2[i]=$("#fecha2-"+i).val();
+			temperaturas2[i]=parseFloat($("#temp2-"+i).val());
+			humedades2[i]=parseFloat($("#hum2-"+i).val());
+		}
 
+		//console.log(temperaturas);
 
-
-
-
-
-
-
-
-	
-	
+		chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'graficoTemp1', 	// Le doy el nombre a la gráfica
+				defaultSeriesType: 'line'	// Pongo que tipo de gráfica es
+			},
+			title: {
+				text: 'Datos de Temperatura'	// Titulo (Opcional)
+			},
+			subtitle: {
+				text: 'Mes Actual'		// Subtitulo (Opcional)
+			},
+			// Pongo los datos en el eje de las 'X'
+			xAxis: {
+				categories: fechas1,
+				// Pongo el título para el eje de las 'X'
+				title: {
+					text: 'Fechas'
+				}
+			},
+			yAxis: {
+				// Pongo el título para el eje de las 'Y'
+				title: {
+					text: 'Temperatura [°C]'
+				}
+			},
+			// Doy formato al la "cajita" que sale al pasar el ratón por encima de la gráfica
+			tooltip: {
+				enabled: true,
+				formatter: function() {
+					return '<b>'+ this.series.name +'</b><br/>'+
+						this.x +': '+ this.y +' '+this.series.name;
+				}
+			},
+			// Doy opciones a la gráfica
+			plotOptions: {
+				line: {
+					dataLabels: {
+						enabled: false
+					},
+					enableMouseTracking: true
+				}
+			},
+			// Doy los datos de la gráfica para dibujarlas
+			series: [{
+		                name: 'Temperatura',
+		                data: temperaturas1
+		            }],
+		});	
+	chart2 = new Highcharts.Chart({
+			chart: {
+				renderTo: 'graficoHum1', 	// Le doy el nombre a la gráfica
+				defaultSeriesType: 'line'	// Pongo que tipo de gráfica es
+			},
+			title: {
+				text: 'Datos de Humedad'	// Titulo (Opcional)
+			},
+			subtitle: {
+				text: 'Mes Actual'		// Subtitulo (Opcional)
+			},
+			// Pongo los datos en el eje de las 'X'
+			xAxis: {
+				categories: fechas1,
+				// Pongo el título para el eje de las 'X'
+				title: {
+					text: 'Fechas'
+				}
+			},
+			yAxis: {
+				// Pongo el título para el eje de las 'Y'
+				title: {
+					text: 'Humedad [%]'
+				}
+			},
+			// Doy formato al la "cajita" que sale al pasar el ratón por encima de la gráfica
+			tooltip: {
+				enabled: true,
+				formatter: function() {
+					return '<b>'+ this.series.name +'</b><br/>'+
+						this.x +': '+ this.y +' '+this.series.name;
+				}
+			},
+			// Doy opciones a la gráfica
+			plotOptions: {
+				line: {
+					dataLabels: {
+						enabled: false
+					},
+					enableMouseTracking: true
+				}
+			},
+			// Doy los datos de la gráfica para dibujarlas
+			series: [{
+		                name: 'Humedad',
+		                data: humedades1
+		            }],
+		});	
+	chart3 = new Highcharts.Chart({
+			chart: {
+				renderTo: 'graficoTemp2', 	// Le doy el nombre a la gráfica
+				defaultSeriesType: 'line'	// Pongo que tipo de gráfica es
+			},
+			title: {
+				text: 'Datos de Temperatura'	// Titulo (Opcional)
+			},
+			subtitle: {
+				text: 'Mes Anterior'		// Subtitulo (Opcional)
+			},
+			// Pongo los datos en el eje de las 'X'
+			xAxis: {
+				categories: fechas2,
+				// Pongo el título para el eje de las 'X'
+				title: {
+					text: 'Fechas'
+				}
+			},
+			yAxis: {
+				// Pongo el título para el eje de las 'Y'
+				title: {
+					text: 'Temperatura [°C]'
+				}
+			},
+			// Doy formato al la "cajita" que sale al pasar el ratón por encima de la gráfica
+			tooltip: {
+				enabled: true,
+				formatter: function() {
+					return '<b>'+ this.series.name +'</b><br/>'+
+						this.x +': '+ this.y +' '+this.series.name;
+				}
+			},
+			// Doy opciones a la gráfica
+			plotOptions: {
+				line: {
+					dataLabels: {
+						enabled: false
+					},
+					enableMouseTracking: true
+				}
+			},
+			// Doy los datos de la gráfica para dibujarlas
+			series: [{
+		                name: 'Temperatura',
+		                data: temperaturas2
+		            }],
+		});	
+	chart4 = new Highcharts.Chart({
+			chart: {
+				renderTo: 'graficoHum2', 	// Le doy el nombre a la gráfica
+				defaultSeriesType: 'line'	// Pongo que tipo de gráfica es
+			},
+			title: {
+				text: 'Datos de Humedad'	// Titulo (Opcional)
+			},
+			subtitle: {
+				text: 'Mes Anterior'		// Subtitulo (Opcional)
+			},
+			// Pongo los datos en el eje de las 'X'
+			xAxis: {
+				categories: fechas2,
+				// Pongo el título para el eje de las 'X'
+				title: {
+					text: 'Fechas'
+				}
+			},
+			yAxis: {
+				// Pongo el título para el eje de las 'Y'
+				title: {
+					text: 'Humedad [%]'
+				}
+			},
+			// Doy formato al la "cajita" que sale al pasar el ratón por encima de la gráfica
+			tooltip: {
+				enabled: true,
+				formatter: function() {
+					return '<b>'+ this.series.name +'</b><br/>'+
+						this.x +': '+ this.y +' '+this.series.name;
+				}
+			},
+			// Doy opciones a la gráfica
+			plotOptions: {
+				line: {
+					dataLabels: {
+						enabled: false
+					},
+					enableMouseTracking: true
+				}
+			},
+			// Doy los datos de la gráfica para dibujarlas
+			series: [{
+		                name: 'Humedad',
+		                data: humedades2
+		            }],
+		});	
 	});
 </script>
 <style type="text/css">
@@ -307,23 +275,22 @@ for ($i=0; $i < $datos["cant_sensores"]; $i++) {
 for ($i=0; $i <$datos["cant_sensores"] ; $i++) { 
 	$cant_reg_act=count($datos["datos_actual"][$i]);
 	$cant_reg_ant=count($datos["datos_anterior"][$i]);
-	echo "<input type='text' id='nombre_codigo-".$i."' name='nombre_codigo-".$i."' value='".$datos["nombre_codigo"][$i]."' hidden >";
-	echo "<input type='text' id='cant_reg_act-".$i."' name='cant_reg_act-".$i."' value='".$cant_reg_act."' hidden >";
+	echo "<input type='text' id='cant_reg_act-".$i."' name='cant_reg_act-".$i."' value='".$cant_reg_act."' >";
 	for ($j=0; $j < $cant_reg_act ; $j++) { 
-		echo "<input type='text' id='id_act-".$i."-".$j."' name='id_act-".$j."' value='".$datos["datos_actual"][$i][$j]["id"]."' hidden >";
-		echo "<input type='text' id='temp_act-".$i."-".$j."' name='temp_act-".$j."' value='".$datos["datos_actual"][$i][$j]["temperatura"]."' hidden >";
-		echo "<input type='text' id='hum_act-".$i."-".$j."' name='hum_act-".$j."' value='".$datos["datos_actual"][$i][$j]["humedad"]."' hidden >";
-		echo "<input type='text' id='fecha_act-".$i."-".$j."' name='fecha_act-".$j."' value='".$datos["datos_actual"][$i][$j]["cuando"]."' hidden >";
+		echo "<input type='text' id='id_act-".$j."' name='id_act-".$j."' value='".$datos["datos_actual"][$i][$j]["id"]."' >";
+		echo "<input type='text' id='temp_act-".$j."' name='temp_act-".$j."' value='".$datos["datos_actual"][$i][$j]["temperatura"]."' >";
+		echo "<input type='text' id='hum_act-".$j."' name='hum_act-".$j."' value='".$datos["datos_actual"][$i][$j]["humedad"]."' >";
+		echo "<input type='text' id='fecha_act-".$j."' name='fecha_act-".$j."' value='".$datos["datos_actual"][$i][$j]["cuando"]."' >";
 	}
 
 
-	echo "<input type='text' id='cant_reg_ant-".$i."' name='cant_reg_ant-".$i."' value='".$cant_reg_ant."' hidden >";
+	echo "<input type='text' id='cant_reg_ant-".$i."' name='cant_reg_ant-".$i."' value='".$cant_reg_ant."' >";
 
 	for ($j=0; $j < $cant_reg_ant; $j++) { 
-		echo "<input type='text' id='id_ant-".$i."-".$j."' name='id_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["id"]."' hidden >";
-		echo "<input type='text' id='temp_ant-".$i."-".$j."' name='temp_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["temperatura"]."' hidden >";
-		echo "<input type='text' id='hum_ant-".$i."-".$j."' name='hum_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["humedad"]."' hidden >";
-		echo "<input type='text' id='fecha_ant-".$i."-".$j."' name='fecha_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["cuando"]."' hidden >";
+		echo "<input type='text' id='id_ant-".$j."' name='id_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["id"]."' >";
+		echo "<input type='text' id='temp_ant-".$j."' name='temp_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["temperatura"]."' >";
+		echo "<input type='text' id='hum_ant-".$j."' name='hum_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["humedad"]."' >";
+		echo "<input type='text' id='fecha_ant-".$j."' name='fecha_ant-".$j."' value='".$datos["datos_anterior"][$i][$j]["cuando"]."' >";
 	}
 }
 ?>

@@ -26,20 +26,16 @@ class graficos extends CI_Controller {
 
     $datos["desde_anterior"]=$desde_anterior;
     $datos["hasta_anterior"]=$hasta_anterior;
-/*
-   	echo $desde_actual;
-   	echo "</br>";
-   	echo $hasta_actual;
-    echo "</br>";
-    echo $desde_anterior;
-    echo "</br>";
-    echo $hasta_anterior;
-    echo "</br>";
-   	exit(); */
-   	//$datos["datos"]=$this->data_model->Datos();
-   	$datos["datos_actual"]=$this->data_model->DatosFiltrados2($desde_actual,$hasta_actual);
-    $datos["datos_anterior"]=$this->data_model->DatosFiltrados2($desde_anterior,$hasta_anterior);
-   	//print_r($datos);exit();
+
+    $datos["sensores"]=$this->data_model->CargarSensores();
+    $datos["cant_sensores"]=count($datos["sensores"]);
+    for ($i=0; $i <  $datos["cant_sensores"]; $i++) { 
+      $datos["datos_actual"][$i]=$this->data_model->DatosFiltrados3($datos["sensores"][$i]["id"],$desde_actual,$hasta_actual);
+      $datos["datos_anterior"][$i]=$this->data_model->DatosFiltrados3($datos["sensores"][$i]["id"],$desde_anterior,$hasta_anterior);
+      $datos["nombre_codigo"][$i]=$this->data_model->NombreCodigo($datos["sensores"][$i]["id"]);
+      //print_r($this->data_model->DatosFiltrados3($datos["sensores"][$i]["id"],$desde_actual,$hasta_actual));
+    }
+   	//print_r($datos["datos_actual"][1]);exit();
 
     $data['section_title']='Sistema de Monitoreo';
 

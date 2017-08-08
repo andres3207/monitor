@@ -55,31 +55,46 @@ class registros extends CI_Controller {
     		$tituloReporte = "Registro de Humedad y Temperatura";
     		$titulosColumnas1 = array('Nº de registro', 'Temperatura', 'Humedad', 'Fecha');
 
-    		// Se combinan las celdas A1 hasta D1, para colocar ahí el titulo del reporte
-			$objPHPExcel->setActiveSheetIndex(0)
-    		->mergeCells('A1:E1');
-			// Se agregan los titulos del reporte
-			$objPHPExcel->setActiveSheetIndex(0)
-		    ->setCellValue('A1',$tituloReporte) // Titulo del reporte
-		    ->setCellValue('A3',  $titulosColumnas1[0])  //Titulo de las columnas
-		    ->setCellValue('B3',  $titulosColumnas1[1])
-		    ->setCellValue('C3',  $titulosColumnas1[2])
-			->setCellValue('D3',  $titulosColumnas1[3]);
+        $sensores=$this->data_model->CargarSensores();
+        $cant_sensores=count($sensores);
+        for ($i=0; $i <$cant_sensores ; $i++) { 
+          // Se combinan las celdas A1 hasta D1, para colocar ahí el titulo del reporte
+      $objPHPExcel->setActiveSheetIndex($i)
+        ->mergeCells('A1:E1');
+      // Se agregan los titulos del reporte
+      $objPHPExcel->setActiveSheetIndex($i)
+        ->setCellValue('A1',$tituloReporte." ".$this->data_model->NombreCodigo($sensores[$i]["id"])) // Titulo del reporte
+        ->setCellValue('A3',  $titulosColumnas1[0])  //Titulo de las columnas
+        ->setCellValue('B3',  $titulosColumnas1[1])
+        ->setCellValue('C3',  $titulosColumnas1[2])
+      ->setCellValue('D3',  $titulosColumnas1[3]);
 
-			$cant_reg=count($datos["datos"]);
-			for ($i=0; $i <$cant_reg ; $i++) { 
-				$objPHPExcel->setActiveSheetIndex(0)
-					->setCellValue('A'.($i+4),  ($i+1))  //Titulo de las columnas
-					->setCellValue('B'.($i+4),  $datos["datos"][$i]["temperatura"])
-					->setCellValue('C'.($i+4),  $datos["datos"][$i]["humedad"])
-					->setCellValue('D'.($i+4),  $datos["datos"][$i]["cuando"]);
-			}
 
-    		for($i = 'A'; $i <= 'Z'; $i++){
-    			$objPHPExcel->setActiveSheetIndex(0)->getColumnDimension($i)->setAutoSize(TRUE);
-			}
-			$objPHPExcel->setActiveSheetIndex(0)->freezePaneByColumnAndRow(0,4);
-			$objPHPExcel->setActiveSheetIndex(0);
+      $registros=$this->data_model->DatosFiltrados3($sensores[$i]["id"],$desde,$hasta);
+      $cant_reg=count($registros);
+      for ($j=0; $j <$cant_reg ; $j++) { 
+        $objPHPExcel->setActiveSheetIndex($i)
+          ->setCellValue('A'.($j+4),  ($j+1))  //Titulo de las columnas
+          ->setCellValue('B'.($j+4),  $registros[$j]["temperatura"])
+          ->setCellValue('C'.($j+4),  $registros[$j]["humedad"])
+          ->setCellValue('D'.($j+4),  $registros[$j]["cuando"]);
+      }
+
+        for($j = 'A'; $j <= 'Z'; $j++){
+          $objPHPExcel->setActiveSheetIndex($i)->getColumnDimension($j)->setAutoSize(TRUE);
+      }
+
+      $objPHPExcel->getActiveSheet()->setTitle($this->data_model->NombreCodigo($sensores[$i]["id"]));
+
+
+      $objPHPExcel->setActiveSheetIndex($i)->freezePaneByColumnAndRow(0,4);
+      
+      $myWorkSheet = new PHPExcel_Worksheet($objPHPExcel," ");
+      $objPHPExcel->addSheet($myWorkSheet);
+        }
+
+        $objPHPExcel->setActiveSheetIndex(0);
+    		
 			// Se manda el archivo al navegador web, con el nombre que se indica, en formato 2007
 			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 			header('Content-Disposition: attachment;filename="Registros.xlsx"');

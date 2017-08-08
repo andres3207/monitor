@@ -17,14 +17,17 @@ class tiemporeal extends CI_Controller {
     $datos["temp"]=fgets($fp1);
     $datos["hum"]=fgets($fp2);
     fclose($fp1);
-    fclose($fp2); */
+    fclose($fp2); 
 
     $fp1 = fopen("/var/www/web/monitor/application/third_party/scripts/temp2", "r");
     $fp2 = fopen("/var/www/web/monitor/application/third_party/scripts/hum2", "r");
     $datos["temp2"]=fgets($fp1);
     $datos["hum2"]=fgets($fp2);
     fclose($fp1);
-    fclose($fp2);
+    fclose($fp2); */
+
+    $datos["sensores"]=$this->data_model->CargarSensores();
+    $datos["umbrales"]=$this->data_model->CargarLimites();
 
    	$data['section_title']='Datos en tiempo real';
 
