@@ -94,6 +94,7 @@ console.log(j*(1130-570));
 </style>
 
 <?php 
+#print_r($datos["tmp"]);
 $cant_camaras=1;
 
 $cant_sensor=0;
@@ -115,58 +116,13 @@ for ($i=0; $i <$cant_sensor ; $i++) {
 ?>
 <div class="container">
 <div class="form-horizontal">
-<!--
-<label>DHT22:</label>
-<div class="form-group">
-<label class='col-md-3 text-left'><p>Temperatura Actual:</p></label>
-<div class="col-md-2"><p><input type='text' class="form-control" id="temp" name="temp" readonly value=<?php echo "'".$datos["temp"]." °C'"; ?>></input></p></div>
-</div>
-
-<div class="form-group">
-<label class='col-md-3 text-left'><p>Humedad Actual:</p></label>
-<div class="col-md-2"><p><input type='text' class="form-control" id="hum" name="hum" readonly value=<?php echo "'".$datos["hum"]." %'"; ?>></input></p></div>
-</div>
-
-<label>SHT71</label> 
-
-<div class="form-group">
-<label class='col-md-3 text-left'><p>Temperatura Actual:</p></label>
-<div class="col-md-2"><p><input type='text' class="form-control" id="temp2" name="temp2" readonly value=<?php echo "'".$datos["temp2"]." °C'"; ?>></input></p></div>
-</div>
-
-<div class="form-group">
-<label class='col-md-3 text-left'><p>Humedad Actual:</p></label>
-<div class="col-md-2"><p><input type='text' class="form-control" id="hum2" name="hum2" readonly value=<?php echo "'".$datos["hum2"]." %'"; ?>></input></p></div>
-</div>
--->
 
 
 
 <?php
 
+
 /*
-
-for ($i=0; $i <$cant_sensor ; $i++) { 
-	if($datos["sensores"][$i]["habilitado"]){
-		if($datos["sensores"][$i]["nombre"]==""){
-			echo "<h2>".$datos["sensores"][$i]["mac_sensor"]."</h2>";
-		}else{
-			echo "<h2>".$datos["sensores"][$i]["nombre"]."</h2>";
-		}
-		echo "<div class='form-group'>";
-		echo "<label class='col-md-3 text-left'><p>Temperatura Actual:</p></label>";
-		echo "<div class='col-md-2'><p><input type='text' class='form-control' id='temp2' name='temp2' readonly value='".$datos["sensores"][$i]["temperatura"]." °C'></input></p></div>";
-		echo "</div>";
-		echo "<div class='form-group'>";
-		echo "<label class='col-md-3 text-left'><p>Humedad Actual:</p></label>";
-		echo "<div class='col-md-2'><p><input type='text' class='form-control' id='hum2' name='hum2' readonly value='".$datos["sensores"][$i]["humedad"]." %'></input></p></div>";
-		echo "</div>";
-		echo "</br>";
-		echo "</br>";
-	}
-}
-
-*/
 
 for ($i=0; $i <$cant_camaras ; $i++) { 
   echo "<table class='table table-condensed'>";
@@ -213,7 +169,51 @@ echo "</tr>";
 echo "</table>";
 echo "</br>";
 }
+*/
 
+
+
+echo "<table class='table table-condensed'>";
+echo "<tr>";
+  echo "<td class='active'><p>Camara:</p></td>";
+  echo "<td class='active'><p>".$datos["tmp"]["camara"]."</p></td>";
+echo "</tr>";
+
+  echo "<tr>";
+  echo "<td class='active'><p>Sensor:</p></td>";
+      echo "<td class='active'><p>".$datos["tmp"]["sensor"]."</p></td>";
+echo "</tr>";
+echo "<tr>";
+if ($datos["tmp"]["temperatura"]<$datos["umbrales"]["t_min"]) {
+      echo "<td class='info'><p>Temperatura:</p></td>";
+      echo "<td class='info'><p>".$datos["tmp"]["temperatura"]."</p></td>";
+    }elseif ($datos["tmp"]["temperatura"]<=$datos["umbrales"]["t_max"]) {
+      echo "<td class='success'><p>Temperatura:</p></td>";
+      echo "<td class='success'><p>".$datos["tmp"]["temperatura"]."</p></td>";
+    }else{
+      echo "<td class='danger'><p>Temperatura:</p></td>";
+      echo "<td class='danger'><p>".$datos["tmp"]["temperatura"]."</p></td>";
+    }
+echo "</tr>";
+echo "<tr>";
+    if ($datos["tmp"]["humedad"]<$datos["umbrales"]["h_min"]) {
+      echo "<td class='info'><p>Humedad:</p></td>";
+      echo "<td class='info'><p>".$datos["tmp"]["humedad"]."</p></td>";
+    }elseif ($datos["tmp"]["humedad"]<=$datos["umbrales"]["h_max"]) {
+      echo "<td class='success'><p>Humedad:</p></td>";
+      echo "<td class='success'><p>".$datos["tmp"]["humedad"]."</p></td>";
+    }else{
+      echo "<td class='danger'><p>Humedad:</p></td>";
+      echo "<td class='danger'><p>".$datos["tmp"]["humedad"]."</p></td>";
+    }
+echo "</tr>";
+echo "<tr><td class='succes'><p>Ultima actualizacion:</p></td>";
+echo "<td class='succes'><p>".$datos["tmp"]["cuando"]."</p></td>";
+echo "</tr>";
+
+
+
+echo "</table>";
 
 
 ?>

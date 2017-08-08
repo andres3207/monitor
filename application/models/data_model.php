@@ -87,5 +87,10 @@
  		$query->next_result();
 		return $query->result_array();
 	}
+	function FuncionTemporal(){
+		$consulta="select * from temporal where id=1";
+		$query=$this->db->query($consulta);
+		return $query->result_array()[0];
+	}
  }
  ?>
