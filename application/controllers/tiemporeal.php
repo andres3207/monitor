@@ -26,10 +26,14 @@ class tiemporeal extends CI_Controller {
     fclose($fp1);
     fclose($fp2); */
 
-    $datos["sensores"]=$this->data_model->CargarSensores();
+    //$datos["sensores"]=$this->data_model->CargarSensores();
     $datos["umbrales"]=$this->data_model->CargarLimites();
-
-    $datos["tmp"]=$this->data_model->FuncionTemporal();
+    $datos["camaras"]=$this->data_model->CargarCamaras();
+    $n=count($datos["camaras"]);
+    for ($i=0; $i <$n ; $i++) { 
+      $datos["sensores_camara"][$i]=$this->data_model->CargarSensoresCamara($datos["camaras"][$i]["id"]);
+    }
+    //$datos["tmp"]=$this->data_model->FuncionTemporal();
 
    	$data['section_title']='Datos en tiempo real';
 

@@ -35,6 +35,29 @@ def run_query(query=''):
    return data
 
 
+def guardar_sensor_camara(camara,sensor,temp,hum):
+	query="SELECT count(id) FROM camaras WHERE mac_camara='"+camara+"'"
+	n=run_query(query)[0][0]
+	#print n
+	if(n==0):
+		query="insert into camaras (mac_camara) value ('"+camara+"')"
+		run_query(query)
+		print "Camara agregada"
+	query="SELECT id FROM camaras WHERE mac_camara='"+camara+"'"
+	id_cam=run_query(query)[0][0]
+	query="SELECT COUNT(id) from sensores where mac_sensor='"+sensor+"'"
+	n=run_query(query)[0][0]
+	if(n==0):
+		query="insert into sensores (mac_sensor,temperatura,humedad,habilitado,id_camara) values('"+sensor+"','"+temp+"','"+hum+"',1,"+str(id_cam)+")"
+		#print query
+		run_query(query)
+		print "Sensor agregado"
+	elif(n==1):
+		query="select id from sensores where mac_sensor='"+sensor+"'"
+		id_sen=run_query(query)[0][0]
+		query="update sensores set temperatura='"+temp+"',humedad='"+hum+"',cuando=now() where id="+str(id_sen)
+		run_query(query)
+		print "Sensor actualizado"
 
 
 ser=serial.Serial(port='/dev/serial0',baudrate=57600)
@@ -58,11 +81,14 @@ while 1:
 	if (lora.upper().startswith("RADIO_RX  "+MAC_propia)):
 		MAC_camara=lora[22:34]
 		MAC_sensor=lora[34:46]
-		temperatura=float(lora[46:50])/10.0
-		humedad=float(lora[50:])/10.0
+		temperatura2=float(lora[46:50])/10.0
+		humedad2=float(lora[50:])/10.0
 		#query="insert into temporal (camara,sensor,temperatura,humedad) values ('"+MAC_camara+"','"+MAC_sensor+"','"+str(temperatura)+"','"+str(humedad)+"')"
-		query="update temporal set camara='"+MAC_camara+"',sensor='"+MAC_sensor+"',temperatura='"+str(temperatura)+"',humedad='"+str(humedad)+"',cuando=now() where id=1"
-		run_query(query)
+		#query="update temporal set camara='"+MAC_camara+"',sensor='"+MAC_sensor+"',temperatura='"+str(temperatura2)+"',humedad='"+str(humedad2)+"',cuando=now() where id=1"
+		#query="SELECT guardar_sensor_camara('"+MAC_camara+"','"+MAC_sensor+"','"+str(temperatura2)+"','"+str(humedad2)+"')"
+		#print query
+		#print run_query(query)
+		guardar_sensor_camara(MAC_camara,MAC_sensor,str(temperatura2),str(humedad2))
 		#print "Base escrita"
 		#print MAC_camara
 		#print MAC_sensor

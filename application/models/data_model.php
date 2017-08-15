@@ -75,6 +75,11 @@
 		$query = $this->db->query("select ".$consulta);
 		return array_values($query->row_array())[0];
 	}
+	function NombreCodigoCamara($id_camara){
+		$consulta="nombre_codigo_camara('".$id_camara."')";
+		$query = $this->db->query("select ".$consulta);
+		return array_values($query->row_array())[0];
+	}
 	function GuardarSensor($temp,$hum,$mac){
 		$consulta="guardar_sensor('".$temp."','".$hum."','".$mac."')";
 		$query = $this->db->query("call ".$consulta);
@@ -87,10 +92,17 @@
  		$query->next_result();
 		return $query->result_array();
 	}
-	function FuncionTemporal(){
-		$consulta="select * from temporal where id=1";
-		$query=$this->db->query($consulta);
-		return $query->result_array()[0];
-	}
+	function CargarCamaras(){
+ 		$consulta="cargar_camaras()";
+ 		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
+ 	}
+ 	function CargarSensoresCamara($id_camara){
+ 		$consulta="cargar_sensores_camara(".$id_camara.")";
+ 		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
+ 	}
  }
  ?>
