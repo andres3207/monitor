@@ -31,7 +31,9 @@ jQuery(document).ready(function() {
 
 <?php
 $cant_reg=count($datos["sensores"]);
+$cant_cam=count($datos["camaras"]);
 echo "<input type='text' id='cant_sensores' name='cant_sensores' value='".$cant_reg."' readonly hidden>";
+echo "<input type='text' id='cant_camaras' name='cant_camaras' value='".$cant_cam."' readonly hidden>";
 
 ?>
 
@@ -40,6 +42,55 @@ echo "<input type='text' id='cant_sensores' name='cant_sensores' value='".$cant_
 
 	<div class="container">
 	<div class="form-horizontal">
+
+	
+		<?php
+	for ($i=0; $i <$cant_cam ; $i++) { 
+		echo "<table class='table table-condensed'>";
+		echo "<tr>";
+		echo "<td><p>Nombre de la camara</p></td>";
+		echo "<td><p>Código de la camara</p></td>";
+		echo "</tr>";
+		echo "<tr>";
+		echo "<td class='col-md-3'><p><input type='text' class='form-control' id='nombre_cam-".$i."' name='nombre_cam-".$i."' value='".$datos["camaras"][$i]["nombre"]."'></p></td>";
+		echo "<td class='col-md-2'><p><input type='text' class='form-control' id='mac_cam-".$i."' name='mac_cam-".$i."' value='".$datos["camaras"][$i]["mac_camara"]."' readonly></p></td>";
+		echo "<td><input type='text' id='id_cam-".$i."' name='id_cam-".$i."' value='".$datos["camaras"][$i]["id"]."' readonly hidden></td>";
+		echo "</tr>";
+
+
+		echo "<table class='table'>";
+		echo "<tr>";
+		echo "<td><p>Nombre del sensor</p></td>";
+		echo "<td><p>Código del sensor</p></td>";
+		echo "<td><p>Estado del sensor</p></td>";
+		echo "<td></td>";
+
+		echo "</tr>";
+
+		for ($j=0; $j <$cant_reg ; $j++) { 
+			if($datos["sensores"][$j]["id_camara"]==$datos["camaras"][$i]["id"]){
+		echo "<tr>";
+		echo "<td class='col-md-3'><p><input type='text' class='form-control' id='nombre_sensor-".$j."' name='nombre_sensor-".$j."' value='".$datos["sensores"][$j]["nombre"]."'></p></td>";
+		echo "<td class='col-md-2'><p><input type='text' class='form-control' id='mac_sensor-".$j."' name='mac_sensor-".$j."' value='".$datos["sensores"][$j]["mac_sensor"]."' readonly></p></td>";
+		if ($datos["sensores"][$j]["habilitado"]) {
+			echo "<td><label class='radio-inline'><input type='radio' id='estado_sensor-".$j."' name='estado_sensor-".$j."'  value='1' checked ><p>Habilitado</p></label>   <label class='radio-inline'><input type='radio' id='estado_sensor-".$j."' name='estado_sensor-".$j."'  value='0'><p>Deshabilitado</p></label></td>";
+		}else{
+			echo "<td><label class='radio-inline'><input type='radio' id='estado_sensor-".$j."' name='estado_sensor-".$j."'  value='1'><p>Habilitado</p></label>   <label class='radio-inline'><input type='radio' id='estado_sensor-".$j."' name='estado_sensor-".$j."'  value='0' checked><p>Deshabilitado</p></label></td>";
+		}
+		echo "<td><input type='text' id='id_sensor-".$j."' name='id_sensor-".$j."' value='".$datos["sensores"][$j]["id"]."' readonly hidden></td>";
+		echo "</tr>";
+		}
+	}
+		echo "</table>";
+
+	}
+
+	?>
+	</table>
+
+
+<!--
+
 
 	<table class='table'>
 	<tr>
@@ -65,7 +116,7 @@ echo "<input type='text' id='cant_sensores' name='cant_sensores' value='".$cant_
 
 	?>
 
-	</table>
+	</table> -->
 <p><input type="submit" class="btn btn-success" value="Guardar cambios"></p>
 </div>
 </div>

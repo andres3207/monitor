@@ -104,5 +104,16 @@
  		$query->next_result();
 		return $query->result_array();
  	}
+ 	function CamaraSensor($id_sensor){
+		$consulta="camara_sensor('".$id_sensor."')";
+		$query = $this->db->query("select ".$consulta);
+		return array_values($query->row_array())[0];
+	}
+	function ActualizarCamara($id,$nombre){
+		$consulta="actualizar_camara(".$id.",'".$nombre."')";
+		$query = $this->db->query("call ".$consulta);
+ 		$query->next_result();
+		return $query->result_array();
+	}
  }
  ?>

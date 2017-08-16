@@ -40,8 +40,9 @@ $cant_reg=count($datos["datos"]);
 <div class="form-group">
 <div class="col-md-12"><p>
 
-<table class='table'>
+<table class='table table-striped'>
 	<tr>
+	<td><p>Camara</p></td>
 	<td><p>Sensor</p></td>
 	<td><p>Temperatura</p></td>
 	<td><p>Humedad</p></td>
@@ -50,7 +51,8 @@ $cant_reg=count($datos["datos"]);
 	<?php
 	for ($i=0; $i <$cant_reg ; $i++) { 
 		echo "<tr>";
-		echo "<td>".$this->data_model->NombreCodigo($datos["datos"][$i]["id_sensor"])."</td>";
+		echo "<td><p>".$this->data_model->NombreCodigoCamara($this->data_model->CamaraSensor($datos["datos"][$i]["id_sensor"]))."</p></td>";
+		echo "<td><p>".$this->data_model->NombreCodigo($datos["datos"][$i]["id_sensor"])."</p></td>";
 		if ($datos["datos"][$i]["temperatura"]<=$datos["limites"]["t_min"]) {
 			echo "<td class='info'><p>".$datos["datos"][$i]["temperatura"]."</p></td>";
 		}elseif ($datos["datos"][$i]["temperatura"]<=$datos["limites"]["t_max"]) {
