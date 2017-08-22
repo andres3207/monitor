@@ -25,10 +25,9 @@ class configuracion extends CI_Controller {
     function guardar(){
     	$t_min=$this->input->post('t_min');
     	$t_max=$this->input->post('t_max');
-    	$h_min=$this->input->post('h_min');
-    	$h_max=$this->input->post('h_max');
 
-    	$this->data_model->ActualizarLimites($t_min,$t_max,$h_min,$h_max);
+
+    	$this->data_model->ActualizarLimites($t_min,$t_max);
     	redirect('/registros', 'refresh');
 
     }

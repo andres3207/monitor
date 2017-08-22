@@ -25,7 +25,7 @@ from email.MIMEText import MIMEText
 
 
 time.sleep(20)
-print "Iniciado"
+print "Alertas Iniciado"
 
 
 DB_HOST='localhost'

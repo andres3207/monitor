@@ -28,8 +28,8 @@
 		return $query->result_array();
  	}
 
- 	function ActualizarLimites($t_min,$t_max,$h_min,$h_max){
- 		$consulta="actualizar_limites('".$t_min."','".$t_max."','".$h_min."','".$h_max."')";
+ 	function ActualizarLimites($t_min,$t_max){
+ 		$consulta="actualizar_limites('".$t_min."','".$t_max."')";
  		$query = $this->db->query("call ".$consulta);
  		$query->next_result();
 		return $query->result_array();
@@ -80,8 +80,8 @@
 		$query = $this->db->query("select ".$consulta);
 		return array_values($query->row_array())[0];
 	}
-	function GuardarSensor($temp,$hum,$mac){
-		$consulta="guardar_sensor('".$temp."','".$hum."','".$mac."')";
+	function GuardarSensor($temp,$mac){  ## CREO QUE BORRAR
+		$consulta="guardar_sensor('".$temp."','".$mac."')";
 		$query = $this->db->query("call ".$consulta);
 		$query->next_result();
 		return $query->result_array();

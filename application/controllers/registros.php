@@ -46,14 +46,14 @@ class registros extends CI_Controller {
 			$objPHPExcel->getProperties()
 			->setCreator("Andres Gomez")
 			->setLastModifiedBy("Andres Gomez") //Ultimo usuario que lo modificó
-    		->setTitle("Datos de monitoreo") // Titulo
+    		->setTitle("Datos de Termometria") // Titulo
     		->setSubject("Datos") //Asunto
-    		->setDescription("Registros de Humedad y Temperatura") //Descripción
-    		->setKeywords("Humedad y Temperatura") //Etiquetas
+    		->setDescription("Registros de Temperatura") //Descripción
+    		->setKeywords("Temperatura") //Etiquetas
     		->setCategory("Reporte excel"); //Categorias
 
-    		$tituloReporte = "Registro de Humedad y Temperatura";
-    		$titulosColumnas1 = array('Nº de registro', 'Temperatura', 'Humedad', 'Fecha');
+    		$tituloReporte = "Registro de Temperatura";
+    		$titulosColumnas1 = array('Nº de registro', 'Temperatura', 'Fecha');
 
         $sensores=$this->data_model->CargarSensores();
         $cant_sensores=count($sensores);
@@ -66,8 +66,7 @@ class registros extends CI_Controller {
         ->setCellValue('A1',$tituloReporte." ".$this->data_model->NombreCodigo($sensores[$i]["id"])) // Titulo del reporte
         ->setCellValue('A3',  $titulosColumnas1[0])  //Titulo de las columnas
         ->setCellValue('B3',  $titulosColumnas1[1])
-        ->setCellValue('C3',  $titulosColumnas1[2])
-      ->setCellValue('D3',  $titulosColumnas1[3]);
+      ->setCellValue('C3',  $titulosColumnas1[2]);
 
 
       $registros=$this->data_model->DatosFiltrados3($sensores[$i]["id"],$desde,$hasta);
@@ -76,8 +75,7 @@ class registros extends CI_Controller {
         $objPHPExcel->setActiveSheetIndex($i)
           ->setCellValue('A'.($j+4),  ($j+1))  //Titulo de las columnas
           ->setCellValue('B'.($j+4),  $registros[$j]["temperatura"])
-          ->setCellValue('C'.($j+4),  $registros[$j]["humedad"])
-          ->setCellValue('D'.($j+4),  $registros[$j]["cuando"]);
+          ->setCellValue('C'.($j+4),  $registros[$j]["cuando"]);
       }
 
         for($j = 'A'; $j <= 'Z'; $j++){
@@ -107,7 +105,7 @@ $objWriter->save('php://output');
 exit();
    		}
    	}
-   	$data['section_title']='Sistema de Monitoreo';
+   	$data['section_title']='Termometria Camaras';
 
 		$data['layout_navigation']=$this->load->view('layout_navigation',NULL,TRUE);
 

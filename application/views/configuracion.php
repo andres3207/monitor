@@ -38,15 +38,6 @@ jQuery(document).ready(function() {
 <div class="col-md-2"><p><input type='number' class="form-control" id="t_max" name="t_max" step="0.10" value=<?php echo "'".$datos["limites"]['t_max']."'"; ?>></input></p></div>
 </div>
 
-<div class="form-group">
-<label class='col-md-3 text-left'><p>Humedad Mínima:<span>%</span></p></label>
-<div class="col-md-2"><p><input type='number' class="form-control" id="h_min" name="h_min" step="0.10" value=<?php echo "'".$datos["limites"]['h_min']."'"; ?>></input></p></div>
-</div>
-
-<div class="form-group">
-<label class='col-md-3 text-left'><p>Humedad Maxima:<span>%</span></p></label>
-<div class="col-md-2"><p><input type='number' class="form-control" id="h_max" name="h_max" step="0.10" value=<?php echo "'".$datos["limites"]['h_max']."'"; ?>></input></p></div>
-</div>
 
 <p><input type="submit" class="btn btn-success" value="Guardar cambios"></p>
 </div>
@@ -63,7 +54,7 @@ jQuery(document).ready(function() {
 <?php echo form_fieldset(''); ?>
 
 <div class="container">
-<h2>Borrar registros datos de humedad y temperatura:</h2>
+<h2>Borrar registros de temperatura:</h2>
 	<div class="form-horizontal">
 		<div class="form-group">
 		<div class='col-md-2'><p><input type="submit" class="btn btn-danger" name="btn_borrar_registros" value="Borrar Datos"></p></div>
